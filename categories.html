@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse Pakistani, Indian, and English music categories on SonicWave." />
+  <title>Categories | SonicWave</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>" />
+</head>
+<body>
+
+  <div id="loading-screen">
+    <div class="loader-logo">SONICWAVE</div>
+    <div class="loader-bars">
+      <div class="loader-bar"></div><div class="loader-bar"></div>
+      <div class="loader-bar"></div><div class="loader-bar"></div>
+      <div class="loader-bar"></div><div class="loader-bar"></div>
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
+ 
+  <nav class="navbar" id="mainNavbar">
+    <div class="nav-inner">
+
+      <!-- LOGO -->
+      <a href="index.html" class="logo">
+        <div class="logo-icon-wrap">
+          <div class="logo-bars">
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+          </div>
+        </div>
+        SonicWave
+      </a>
+
+      <!-- NAV LINKS -->
+      <ul class="nav-links" id="mainNavLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="categories.html" class="active">Categories</a></li>
+        <li><a href="player.html">Player</a></li>
+      </ul>
+
+      <!-- RIGHT GROUP -->
+      <div class="nav-right">
+        <a href="explore.html" class="nav-search-btn" title="Search">🔍</a>
+        <div class="nav-sep"></div>
+        <a href="login.html" class="nav-cta">
+          <span class="nav-cta-dot"></span>
+          Login / Signup
+        </a>
+        <!-- Hamburger (mobile) -->
+        <div class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('images/banner.jpeg');"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1>Music Categories</h1>
+      <p>Explore handpicked collections from three amazing music cultures — Pakistani, Indian & English.</p>
+    </div>
+  </section>
+
+  <!-- ===== CATEGORIES CONTENT ===== -->
+  <section class="section">
+    <div class="section-inner">
+
+      <!-- Category Nav Pills -->
+      <div class="filter-tabs" style="margin-bottom:3rem;">
+        <a href="#pakistani" class="filter-tab active">🇵🇰 Pakistani</a>
+        <a href="#indian" class="filter-tab">🇮🇳 Indian</a>
+        <a href="#english" class="filter-tab">🌐 English</a>
+      </div>
+
+      <!-- ===== PAKISTANI ===== -->
+      <div class="category-section animate-on-scroll" id="pakistani">
+        <div class="category-section-header">
+          <span class="cat-icon">🇵🇰</span>
+          <h2><span>Pakistani</span> Music</h2>
+          <span class="count-badge">12 Songs</span>
+        </div>
+        <div class="songs-grid" id="pakistaniGrid"></div>
+      </div>
+
+      <div class="neon-divider"></div>
+
+      <!-- ===== INDIAN ===== -->
+      <div class="category-section animate-on-scroll" id="indian">
+        <div class="category-section-header">
+          <span class="cat-icon">🇮🇳</span>
+          <h2><span>Indian</span> Music</h2>
+          <span class="count-badge">12 Songs</span>
+        </div>
+        <div class="songs-grid" id="indianGrid"></div>
+      </div>
+
+      <div class="neon-divider"></div>
+
+      <!-- ===== ENGLISH ===== -->
+      <div class="category-section animate-on-scroll" id="english">
+        <div class="category-section-header">
+          <span class="cat-icon">🌐</span>
+          <h2><span>English</span> Music</h2>
+          <span class="count-badge">12 Songs</span>
+        </div>
+        <div class="songs-grid" id="englishGrid"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">🎵 SonicWave</div>
+          <p>The ultimate music streaming experience.</p>
+          <div class="social-links">
+            <a href="#" class="social-link">📸</a>
+            <a href="#" class="social-link">🐦</a>
+            <a href="#" class="social-link">▶</a>
+            <a href="#" class="social-link">👤</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="player.html">Player</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#pakistani">🇵🇰 Pakistani</a></li>
+            <li><a href="#indian">🇮🇳 Indian</a></li>
+            <li><a href="#english">🌐 English</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 SonicWave. Made by IQra khan ❤️</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== PLAYER BAR ===== -->
+  <div class="player-bar hidden" id="playerBar">
+    <div class="player-track">
+      <div class="player-thumb"><img src="images/singer/arijitsingh.jpg" alt="Track" id="barThumb" /></div>
+      <div class="player-track-info">
+        <h4 id="barTitle">Select a song</h4>
+        <p id="barArtist">SonicWave</p>
+      </div>
+      <button class="player-heart" id="barHeart">♡</button>
+    </div>
+    <div class="player-controls">
+      <button class="ctrl-btn" id="barShuffle">🔀</button>
+      <button class="ctrl-btn" id="barPrev">⏮</button>
+      <button class="play-pause-btn" id="barPlay">▶</button>
+      <button class="ctrl-btn" id="barNext">⏭</button>
+      <button class="ctrl-btn" id="barRepeat">🔁</button>
+    </div>
+    <div class="player-progress-area">
+      <div class="progress-bar-container" id="barProgressContainer">
+        <div class="progress-bar-fill" id="barProgress"></div>
+      </div>
+      <div class="progress-times">
+        <span id="barCurrentTime">0:00</span>
+        <span id="barDuration">0:00</span>
+      </div>
+    </div>
+    <div class="player-volume">
+      <button class="volume-btn" id="barVolume">🔊</button>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70" />
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <span class="toast-icon">🎵</span>
+    <span id="toastMsg">Now Playing!</span>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

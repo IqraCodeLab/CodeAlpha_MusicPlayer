@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SonicWave - Premium music streaming. Music for every mood." />
+  <title>SonicWave | Music For Every Mood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+
+    * { 
+      margin:0;
+       padding:0;
+        box-sizing:border-box; 
+      }
+
+    
+
+    html, body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: 85px;
+    }
+
+    /* BG IMAGE */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/music.jpeg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.65) saturate(1.4);
+      transform: scale(1.05);
+      animation: slowZoom 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.12); }
+    }
+
+    /* Dark gradient overlay */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(168,85,247,0.25) 0%, transparent 60%),
+        linear-gradient(to bottom,
+          rgba(6,6,16,0.5) 0%,
+          rgba(6,6,16,0.2) 40%,
+          rgba(6,6,16,0.85) 85%,
+          rgba(6,6,16,1) 100%);
+    }
+:root {
+      --pink: #ff00cc;
+      --purple: #a855f7;
+      --blue: #3b82f6;
+      --dark: #060610;
+      --glass: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.1);
+      --glow-pink: rgba(255,0,204,0.4);
+      --glow-purple: rgba(168,85,247,0.4);
+    }
+    /* Floating particles */
+    .particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
+      5%   { opacity: 0.7; }
+      95%  { opacity: 0.4; }
+      100% { transform: translateY(-10vh) translateX(30px); opacity: 0; }
+    }
+
+    /* ===== HERO CONTENT ===== */
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      max-width: 820px;
+      padding: 0 2rem;
+      margin-top: 60px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(168,85,247,0.15);
+      border: 1px solid rgba(168,85,247,0.35);
+      color: #a855f7;
+      padding: 7px 20px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
+      animation: fadeUp 0.7s ease forwards;
+      box-shadow: 0 0 20px rgba(168,85,247,0.2);
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+
+    .hero-title .line1 {
+      color: #fff;
+      text-shadow: 0 0 40px rgba(255,255,255,0.2);
+      display: block;
+    }
+
+    .hero-title .line2 {
+      background: linear-gradient(135deg, #ff00cc, #a855f7, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      filter: drop-shadow(0 0 30px rgba(168,85,247,0.5));
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 2.2rem;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    /* Hero Buttons */
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.45s ease both;
+      margin-bottom: 1rem;
+    }
+
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 38px;
+      background: linear-gradient(135deg, #ff00cc, #7b2ff7);
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 0 30px rgba(255,0,204,0.45), 0 8px 30px rgba(123,47,247,0.3);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .btn-start:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 55px rgba(255,0,204,0.65), 0 15px 40px rgba(123,47,247,0.4);
+    }
+
+    .btn-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(168,85,247,0.5);
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .btn-explore:hover {
+      border-color: #a855f7;
+      box-shadow: 0 0 25px rgba(168,85,247,0.4);
+      transform: translateY(-3px);
+    }
+
+    /* Hero stats */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      animation: fadeUp 0.7s 0.6s ease both;
+      margin-top: 1.5rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ff00cc, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 2px;
+    }
+
+    /* ===== FLOATING MUSIC PLAYER CARD ===== */
+    .player-wrap {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 0 1rem 3rem;
+      animation: fadeUp 0.8s 0.7s ease both;
+    }
+
+    .music-card {
+      width: 100%;
+      max-width: 680px;
+      background: rgba(13,13,26,0.75);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 22px;
+      padding: 0;
+      box-shadow:
+        0 0 0 1px rgba(255,0,204,0.08),
+        0 0 40px rgba(168,85,247,0.2),
+        0 30px 60px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .music-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.6), rgba(255,0,204,0.6), transparent);
+    }
+
+    /* ===== PLAYER INNER ===== */
+    .player-inner {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    /* Album Art */
+    .album-art {
+      width: 150px;
+      min-height: 150px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px 0 0 22px;
+    }
+
+    .album-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .album-art:hover img { transform: scale(1.08); }
+
+    .album-art-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(255,0,204,0.1));
+    }
+
+    .album-label {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      text-align: center;
+    }
+
+    .album-label span:first-child {
+      display: block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255,0,204,0.8);
+    }
+
+    .album-label span:last-child {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 1px;
+    }
+
+    /* Player Right Panel */
+    .player-right {
+      flex: 1;
+      padding: 18px 20px 18px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Player Top Row */
+    .player-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .now-playing-tag {
+      font-size: 0.72rem;
+      color: #ff00cc;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .now-playing-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #ff00cc;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #ff00cc;
+      animation: blink 1s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .player-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.5);
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      padding: 4px;
+      border-radius: 6px;
+      line-height: 1;
+    }
+
+    .icon-btn:hover { color: #fff; }
+
+    .icon-btn.liked { color: #ff00cc; text-shadow: 0 0 10px #ff00cc; }
+
+    /* Fullscreen Button */
+    .fullscreen-btn {
+      background: rgba(168,85,247,0.15) !important;
+      border: 1px solid rgba(168,85,247,0.3) !important;
+      color: #a855f7 !important;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem !important;
+      transition: all 0.3s !important;
+    }
+
+    .fullscreen-btn:hover {
+      background: rgba(168,85,247,0.3) !important;
+      box-shadow: 0 0 15px rgba(168,85,247,0.4) !important;
+      color: #fff !important;
+    }
+
+    /* Track Info */
+    .track-info { margin-bottom: 8px; }
+
+    .track-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .track-artist {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .verified {
+      color: #a855f7;
+      font-size: 0.8rem;
+    }
+
+    /* Waveform */
+    .waveform {
+      display: flex;
+      align-items: center;
+      gap: 2.5px;
+      height: 36px;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .wave-bar {
+      width: 3px;
+      border-radius: 3px;
+      background: linear-gradient(to top, #ff00cc, #a855f7);
+      opacity: 0.35;
+      transition: opacity 0.3s;
+    }
+
+    .waveform.playing .wave-bar {
+      opacity: 1;
+      animation: waveAnim var(--dur, 0.8s) ease-in-out infinite alternate;
+      box-shadow: 0 0 6px rgba(255,0,204,0.5);
+    }
+
+    @keyframes waveAnim {
+      from { height: 4px; }
+      to   { height: var(--h, 24px); }
+    }
+
+    /* Progress */
+    .progress-area { margin-bottom: 10px; }
+
+    .progress-bar-track {
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff00cc, #7b2ff7);
+      border-radius: 4px;
+      width: 45%;
+      box-shadow: 0 0 8px rgba(255,0,204,0.5);
+      position: relative;
+      transition: width 0.5s linear;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      right: -5px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #ff00cc;
+    }
+
+    .progress-times {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ctrl {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 5px;
+      border-radius: 8px;
+    }
+
+    .ctrl:hover { color: #fff; transform: scale(1.1); }
+
+    .ctrl-play {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #ff00cc, #7b2ff7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255,0,204,0.5);
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .ctrl-play:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 40px rgba(255,0,204,0.7);
+    }
+
+    .ctrl-play.paused::after { content: ''; }
+
+    /* ====================================================
+       FULLSCREEN PLAYER OVERLAY
+    ===================================================== */
+    .fullscreen-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .fullscreen-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Blurred animated BG */
+    .fs-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/WhatsApp Image 2026-07-19 at 9.51.23 PM (2).jpeg');
+      background-size: cover;
+      background-position: center;
+      filter: blur(50px) brightness(0.25) saturate(1.8);
+      transform: scale(1.1);
+    }
+
+    .fs-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(6,6,16,0.6);
+    }
+
+    .fs-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    /* FS Album Art */
+    .fs-album {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 80px rgba(168,85,247,0.5), 0 0 150px rgba(255,0,204,0.2);
+      aspect-ratio: 1;
+      position: relative;
+    }
+
+    .fs-album img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fs-album.spinning img {
+      animation: rotateSlow 18s linear infinite;
+    }
+
+    @keyframes rotateSlow {
+      from { transform: scale(1.05) rotate(0deg); }
+      to   { transform: scale(1.05) rotate(360deg); }
+    }
+
+    .fs-album::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(168,85,247,0.4);
+      border-radius: 24px;
+    }
+
+    /* FS Player Panel */
+    .fs-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .fs-close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 2;
+    }
+
+    .fs-close-btn:hover {
+      background: rgba(168,85,247,0.2);
+      border-color: rgba(168,85,247,0.5);
+      box-shadow: 0 0 15px rgba(168,85,247,0.3);
+    }
+
+    .fs-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff00cc;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    .fs-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: #ff00cc;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #ff00cc;
+      animation: blink 1s ease-in-out infinite;
+    }
+
+    .fs-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 40%, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .fs-artist {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* FS Waveform */
+    .fs-waveform {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 55px;
+    }
+
+    .fs-wave-bar {
+      width: 4px;
+      border-radius: 4px;
+      background: linear-gradient(to top, #ff00cc, #a855f7);
+    }
+
+    .fs-waveform.playing .fs-wave-bar {
+      animation: waveAnim var(--dur, 0.8s) ease-in-out infinite alternate;
+      box-shadow: 0 0 8px rgba(255,0,204,0.4);
+    }
+
+    /* FS Progress */
+    .fs-progress-bar {
+      height: 5px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 5px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .fs-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff00cc, #7b2ff7);
+      border-radius: 5px;
+      width: 45%;
+      box-shadow: 0 0 10px rgba(255,0,204,0.5);
+      position: relative;
+      transition: width 0.5s linear;
+    }
+
+    .fs-progress-fill::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #ff00cc;
+    }
+
+    .fs-times {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Orbitron', sans-serif;
+      margin-top: 6px;
+    }
+
+    /* FS Controls */
+    .fs-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+
+    .fs-ctrl {
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .fs-ctrl:hover {
+      color: #fff;
+      border-color: rgba(168,85,247,0.5);
+      box-shadow: 0 0 20px rgba(168,85,247,0.3);
+      transform: scale(1.1);
+    }
+
+    .fs-ctrl.active {
+      color: #a855f7;
+      border-color: rgba(168,85,247,0.5);
+    }
+
+    .fs-play-btn {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #ff00cc, #7b2ff7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 35px rgba(255,0,204,0.6);
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .fs-play-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 60px rgba(255,0,204,0.8);
+    }
+
+    /* FS Volume */
+    .fs-volume {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .fs-vol-icon {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+    }
+
+    .fs-vol-range {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .fs-vol-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #a855f7;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(168,85,247,0.6);
+    }
+
+    /* ============ ANIMATIONS ============ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      z-index: 5;
+      animation: fadeUp 1s 1.2s ease both;
+    }
+
+    .scroll-mouse {
+      width: 22px;
+      height: 35px;
+      border: 2px solid rgba(168,85,247,0.4);
+      border-radius: 11px;
+      display: flex;
+      justify-content: center;
+      padding-top: 5px;
+    }
+
+    .scroll-dot {
+      width: 3px;
+      height: 7px;
+      background: #a855f7;
+      border-radius: 3px;
+      animation: scrollDown 2s ease infinite;
+      box-shadow: 0 0 6px #a855f7;
+    }
+
+    @keyframes scrollDown {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(10px); opacity: 0; }
+    }
+
+    /* ==============================
+       TOP ARTISTS SECTION
+    ================================= */
+    .top-artists {
+      padding: 60px 2rem 20px;
+      background: var(--dark);
+      max-width: 1300px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .artists-grid-wrapper {
+      margin-top: 1rem;
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 20px;
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .artists-grid-wrapper::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+
+    .artists-grid {
+      display: flex;
+      gap: 2rem;
+      padding: 10px;
+      width: max-content;
+    }
+
+    .artist-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      width: 140px;
+    }
+
+    .artist-img-wrapper {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      padding: 4px;
+      border: 2px solid transparent;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .artist-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: all 0.4s ease;
+      filter: grayscale(20%);
+    }
+
+    .artist-card:hover .artist-img-wrapper {
+      border-color: #a855f7;
+      box-shadow: 0 0 25px rgba(168,85,247,0.4), inset 0 0 15px rgba(255,0,204,0.3);
+      transform: translateY(-8px);
+    }
+
+    .artist-card:hover .artist-img-wrapper img {
+      filter: grayscale(0%);
+    }
+
+    .artist-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      transition: color 0.3s;
+    }
+
+    .artist-card:hover .artist-name {
+      color: #ff00cc;
+      text-shadow: 0 0 10px rgba(255,0,204,0.5);
+    }
+
+    /* ============ RESPONSIVE ============ */
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.3s;
+    }
+
+    .hamburger:hover {
+      background: rgba(168,85,247,0.12);
+      border-color: rgba(168,85,247,0.3);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 85px; left: 0; right: 0;
+        background: rgba(6,6,16,0.97);
+        backdrop-filter: blur(30px);
+        padding: 1.5rem 2rem 2rem;
+        border-bottom: 1px solid rgba(168,85,247,0.2);
+        gap: 4px;
+        z-index: 99;
+        animation: slideDown 0.3s ease;
+      }
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .nav-links.open a {
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-size: 1rem;
+      }
+      .hamburger { display: flex; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-stats { gap: 1.5rem; }
+      .music-card { max-width: 100%; }
+      .album-art { width: 120px; }
+      .player-right { padding: 14px 14px 14px 16px; }
+      .fs-content { grid-template-columns: 1fr; }
+      .fs-album { width: 220px; margin: 0 auto; }
+      .fs-title { font-size: 2rem; }
+      .nav-search-btn { display: none; }
+      .nav-sep { display: none; }
+      .navbar { height: 70px; }
+      .hero { padding-top: 70px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       NAVBAR
+  ================================= -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="nav-inner">
+
+      <!-- LOGO -->
+      <a href="index.html" class="logo">
+        <div class="logo-icon-wrap">
+          <div class="logo-bars">
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+          </div>
+        </div>
+        SonicWave
+      </a>
+
+      <!-- NAV LINKS -->
+      <ul class="nav-links" id="mainNavLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="player.html">Player</a></li>
+      </ul>
+
+      <!-- RIGHT GROUP -->
+      <div class="nav-right">
+        <a href="explore.html" class="nav-search-btn" title="Search">🔍</a>
+        <div class="nav-sep"></div>
+        <a href="login.html" class="nav-cta">
+          <span class="nav-cta-dot"></span>
+          Login / Signup
+        </a>
+        <!-- Hamburger (mobile) -->
+        <div class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ==============================
+       HERO SECTION
+  ================================= -->
+  <section class="hero" id="hero">
+
+    <!-- BG image -->
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Hero Text Content -->
+    <div class="hero-content">
+      <div class="hero-badge">🎧 &nbsp; Feel Every Beat</div>
+
+      <h1 class="hero-title">
+        <span class="line1">Music for</span>
+        <span class="line2">every mood.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Stream millions of songs, discover new artists,<br />
+        and create your perfect vibe — all in one place.
+      </p>
+
+      <div class="hero-btns">
+        <button class="btn-start" onclick="window.location='player.html'">
+          ▶ Start Listening
+        </button>
+        <button class="btn-explore" onclick="window.location='explore.html'">
+          ✦ Explore Premium
+        </button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">50K+</div>
+          <div class="stat-lbl">Songs</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1M+</div>
+          <div class="stat-lbl">Listeners</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-lbl">Languages</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================
+         FLOATING MUSIC PLAYER CARD
+    ================================= -->
+    <div class="player-wrap">
+      <div class="music-card" id="musicCard">
+        <div class="player-inner">
+
+          <!-- Album Art -->
+          <div class="album-art">
+            <img src="images/singer/arijitsingh.jpg"
+                 alt="Euphoria - Midnight Drive"
+                 id="miniAlbumImg"
+                 onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'" />
+            <div class="album-art-overlay"></div>
+            <div class="album-label">
+              <span>EUPHORIA</span>
+              <span>MIDNIGHT DRIVE</span>
+            </div>
+          </div>
+
+          <!-- Player Right -->
+          <div class="player-right">
+
+            <!-- Top row -->
+            <div class="player-top">
+              <div class="now-playing-tag">Now Playing</div>
+              <div class="player-actions">
+                <button class="icon-btn liked" id="miniHeart" onclick="toggleHeart(this)" title="Like">♥</button>
+                <button class="icon-btn" title="More">•••</button>
+                <!-- FULLSCREEN BUTTON -->
+                <button class="icon-btn fullscreen-btn" id="openFullscreen"
+                        onclick="openFullscreenPlayer()"
+                        title="Fullscreen Player ⛶">⛶</button>
+              </div>
+            </div>
+
+            <!-- Track info -->
+            <div class="track-info">
+              <div class="track-title" id="miniTitle">Midnight Drive</div>
+              <div class="track-artist">
+                <span id="miniArtist">Euphoria</span>
+                <span class="verified">✓</span>
+              </div>
+            </div>
+
+            <!-- Waveform -->
+            <div class="waveform" id="miniWaveform">
+              <!-- JS generates bars -->
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-area">
+              <div class="progress-bar-track" id="miniProgressTrack" onclick="seekProgress(event, this)">
+                <div class="progress-fill" id="miniProgressFill"></div>
+              </div>
+              <div class="progress-times">
+                <span id="miniCurrentTime">1:43</span>
+                <span id="miniDuration">3:54</span>
+              </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+              <button class="ctrl" id="miniShuffle" onclick="toggleCtrl(this)" title="Shuffle">⇄</button>
+              <button class="ctrl" onclick="miniPrev()" title="Previous">⏮</button>
+              <button class="ctrl-play" id="miniPlayBtn" onclick="toggleMiniPlay()" title="Play/Pause">⏸</button>
+              <button class="ctrl" onclick="miniNext()" title="Next">⏭</button>
+              <button class="ctrl" id="miniRepeat" onclick="toggleCtrl(this)" title="Repeat">↺</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint">
+      <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+      <span>Scroll</span>
+    </div>
+
+  </section>
+
+  <!-- ==============================
+       FULLSCREEN PLAYER OVERLAY
+  ================================= -->
+  <div class="fullscreen-overlay" id="fullscreenOverlay">
+
+    <!-- Blurred BG -->
+    <div class="fs-bg" id="fsBg"></div>
+    <div class="fs-overlay"></div>
+
+    <!-- Close Button -->
+    <button class="fs-close-btn" onclick="closeFullscreenPlayer()" title="Exit Fullscreen">✕</button>
+
+    <!-- Content -->
+    <div class="fs-content">
+
+      <!-- FS Album Art -->
+      <div class="fs-album" id="fsAlbum">
+        <img src="images/singer/arijitsingh.jpg"
+             alt="Album Art"
+             id="fsAlbumImg"
+             onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'" />
+      </div>
+
+      <!-- FS Player Panel -->
+      <div class="fs-panel">
+
+        <div>
+          <div class="fs-badge">Now Playing</div>
+          <h2 class="fs-title" id="fsTitle">Midnight Drive</h2>
+          <div class="fs-artist">
+            <span id="fsArtist">Euphoria</span>
+            <span class="verified" style="font-size:1rem;">✓</span>
+          </div>
+        </div>
+
+        <!-- FS Waveform -->
+        <div class="fs-waveform" id="fsWaveform"></div>
+
+        <!-- FS Progress -->
+        <div>
+          <div class="fs-progress-bar" id="fsProgressBar" onclick="seekFsProgress(event, this)">
+            <div class="fs-progress-fill" id="fsProgressFill"></div>
+          </div>
+          <div class="fs-times">
+            <span id="fsCurrentTime">1:43</span>
+            <span id="fsDuration">3:54</span>
+          </div>
+        </div>
+
+        <!-- FS Controls -->
+        <div class="fs-controls">
+          <button class="fs-ctrl" id="fsShuffle" onclick="toggleFsCtrl(this)" title="Shuffle">⇄</button>
+          <button class="fs-ctrl" onclick="miniPrev()" title="Previous">⏮</button>
+          <button class="fs-play-btn" id="fsPlayBtn" onclick="toggleFsPlay()">⏸</button>
+          <button class="fs-ctrl" onclick="miniNext()" title="Next">⏭</button>
+          <button class="fs-ctrl" id="fsRepeat" onclick="toggleFsCtrl(this)" title="Repeat">↺</button>
+        </div>
+
+        <!-- Volume -->
+        <div class="fs-volume">
+          <span class="fs-vol-icon" id="fsVolIcon" onclick="toggleFsMute()">🔊</span>
+          <input type="range" class="fs-vol-range" id="fsVolume" min="0" max="100" value="70" />
+          <span style="font-size:0.78rem;color:rgba(255,255,255,0.4);font-family:'Orbitron',sans-serif;min-width:32px;">70%</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================
+       EXTRA SECTIONS BELOW HERO
+  ================================= -->
+
+  <!-- Top Artists Section -->
+  <section class="top-artists" id="topArtistsSection">
+    <div class="section-header">
+      <h2 class="section-title">Top <span>Artists</span></h2>
+      <a href="categories.html" class="view-all">View All</a>
+    </div>
+    <div class="artists-grid-wrapper">
+      <div class="artists-grid" id="topArtistsGrid">
+        <!-- JS generates artists here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Songs Section -->
+  <section style="padding:80px 2rem; background:var(--dark);">
+    <div style="max-width:1300px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <div style="font-size:0.78rem;font-weight:700;letter-spacing:3px;color:#ff00cc;text-transform:uppercase;margin-bottom:1rem;">🔥 Hot Right Now</div>
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:2.2rem;font-weight:800;margin-bottom:0.8rem;">
+          Trending <span style="background:linear-gradient(135deg,#ff00cc,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Songs</span>
+        </h2>
+        <p style="color:rgba(255,255,255,0.5);">Most played tracks this week</p>
+      </div>
+      <div id="trendingSongs" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.4rem;"></div>
+      <div style="text-align:center;margin-top:2.5rem;">
+        <a href="explore.html" class="btn-start" style="display:inline-flex;">🎵 View All Songs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Preview -->
+  <section style="padding:0 2rem 80px;background:var(--dark);">
+    <div style="max-width:1300px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:2.5rem;">
+        <div style="font-size:0.78rem;font-weight:700;letter-spacing:3px;color:#ff00cc;text-transform:uppercase;margin-bottom:1rem;">🌍 Browse By Origin</div>
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:2.2rem;font-weight:800;">
+          Music <span style="background:linear-gradient(135deg,#ff00cc,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Categories</span>
+        </h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;" id="catGrid"></div>
+    </div>
+  </section>
+
+  <!-- Premium Section -->
+  <section style="padding:0 2rem 40px; background:var(--dark);">
+    <div style="max-width:1300px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:24px;overflow:hidden;display:flex;align-items:stretch;min-height:350px;flex-wrap:wrap;">
+      
+      <!-- 40% Text Area -->
+      <div style="flex:1 1 40%; padding:4rem; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:3rem;font-weight:900;margin-bottom:1rem;line-height:1.1;">
+          Go <span style="background:linear-gradient(135deg,#ff00cc,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Premium.</span><br />Feel the Difference.
+        </h2>
+        <p style="font-size:1.1rem;color:rgba(255,255,255,0.7);margin-bottom:2.5rem;line-height:1.6;">
+          Ad-free listening, unlimited skips,<br />offline downloads, and more.
+        </p>
+        <div>
+          <a href="#" class="btn-start" style="padding:14px 32px;font-size:1rem;display:inline-block;">Try Premium Free ➔</a>
+        </div>
+      </div>
+
+      <!-- 60% Image Area -->
+      <div style="flex:1 1 60%; position:relative; min-height:350px;">
+        <img src="images/cloud.jpeg" alt="DJ Crowd" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;" />
+        <!-- Gradient to blend the image edge with the left side -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(6,6,16,1) 0%, transparent 25%);"></div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- App Store / Rating Banner -->
+  <section style="padding:0 2rem 80px; background:var(--dark);">
+    <div style="max-width:1300px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+      
+      <!-- Left: Logo & Text -->
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg, rgba(255,0,204,0.15), rgba(168,85,247,0.2));border:1px solid rgba(168,85,247,0.35);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+          <div style="display:flex;align-items:flex-end;gap:2.5px;height:22px;">
+            <div style="width:3px;height:10px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
+            <div style="width:3px;height:18px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
+            <div style="width:3px;height:22px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
+            <div style="width:3px;height:14px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
+            <div style="width:3px;height:8px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:2px;">SonicWave</h3>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Your music. Your vibe.</p>
+        </div>
+      </div>
+
+      <!-- Middle: Rating -->
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:1.4rem;font-weight:700;font-family:'Orbitron',sans-serif;">4.8</span>
+          <div style="color:#fbbf24;font-size:1.2rem;letter-spacing:2px;">★★★★★</div>
+        </div>
+        <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:2px;">50K+ Reviews</p>
+      </div>
+
+      <!-- Right: Badges -->
+      <div style="display:flex;align-items:center;gap:12px;">
+        <a href="#" style="display:flex;align-items:center;gap:8px;background:#000;border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:8px;color:#fff;text-decoration:none;transition:all 0.3s;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 14c-.1-3.2 2.6-4.8 2.7-4.8-1.5-2.2-3.8-2.5-4.6-2.6-2-.2-3.8 1.2-4.8 1.2-1.1 0-2.6-1.1-4.2-1.1-2.1 0-4 1.2-5.1 3-2.1 3.8-.5 9.4 1.6 12.3 1 1.4 2.2 3 3.7 2.9 1.5-.1 2.1-.9 3.9-.9 1.8 0 2.3.9 3.9.9 1.6.1 2.6-1.7 3.6-3.1 1.2-1.6 1.7-3.3 1.7-3.4-.1-.1-2.3-.9-2.4-3.5zM15 4.9c.8-1 1.4-2.4 1.2-3.8-1.2.1-2.7.8-3.6 1.7-.7.7-1.4 2.1-1.2 3.6 1.4.1 2.7-.6 3.6-1.5z"/></svg>
+          <div style="display:flex;flex-direction:column;">
+            <span style="font-size:0.6rem;opacity:0.8;line-height:1;">Download on the</span>
+            <span style="font-size:1.05rem;font-weight:600;line-height:1.1;">App Store</span>
+          </div>
+        </a>
+        <a href="#" style="display:flex;align-items:center;gap:8px;background:#000;border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:8px;color:#fff;text-decoration:none;transition:all 0.3s;">
+          <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4caf50" d="M3.6 3.3L15.3 12 3.6 20.7C3.2 20.9 3 20.6 3 20.2V3.8c0-.4.2-.7.6-.5z"/><path fill="#ffeb3b" d="M15.3 12l4.8-3.6-2.5-1.5-2.3 5.1z"/><path fill="#f44336" d="M3.6 3.3l14 8.1 2.5-1.5C21.3 9 21.3 7.8 20.1 7.1L4.8 2.8c-.5-.3-.9-.1-1.2.5z"/><path fill="#2196f3" d="M3.6 20.7l14-8.1 2.5 1.5c1.2.7 1.2 1.9 0 2.6L4.8 21.2c-.5.3-.9.1-1.2-.5z"/></svg>
+          <div style="display:flex;flex-direction:column;">
+            <span style="font-size:0.6rem;opacity:0.8;line-height:1;">GET IT ON</span>
+            <span style="font-size:1.05rem;font-weight:600;line-height:1.1;">Google Play</span>
+          </div>
+        </a>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#0a0a18;border-top:1px solid rgba(255,255,255,0.06);padding:40px 2rem;text-align:center;margin-bottom:0;box-shadow:0 -10px 40px rgba(168,85,247,0.15);">
+    <div style="font-family:'Orbitron',sans-serif;font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#ff00cc,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;">🎵 SonicWave</div>
+    <p style="color:rgba(255,255,255,0.3);font-size:0.85rem;text-align:center;">© 2026 SonicWave. Made by IQra khan ❤️</p>
+  </footer>
+
+  <!-- ===== PLAYER BAR ===== -->
+  <div class="player-bar hidden" id="playerBar">
+    <div class="player-track">
+      <div class="player-thumb"><img src="images/singer/arijitsingh.jpg" alt="Track" id="barThumb" /></div>
+      <div class="player-track-info">
+        <h4 id="barTitle">Select a song</h4>
+        <p id="barArtist">SonicWave</p>
+      </div>
+      <button class="player-heart" id="barHeart">♡</button>
+    </div>
+    <div class="player-controls">
+      <button class="ctrl-btn" id="barShuffle">🔀</button>
+      <button class="ctrl-btn" id="barPrev">⏮</button>
+      <button class="play-pause-btn" id="barPlay">▶</button>
+      <button class="ctrl-btn" id="barNext">⏭</button>
+      <button class="ctrl-btn" id="barRepeat">🔁</button>
+    </div>
+    <div class="player-progress-area">
+      <div class="progress-bar-container" id="barProgressContainer">
+        <div class="progress-bar-fill" id="barProgress"></div>
+      </div>
+      <div class="progress-times">
+        <span id="barCurrentTime">0:00</span>
+        <span id="barDuration">0:00</span>
+      </div>
+    </div>
+    <div class="player-volume">
+      <button class="volume-btn" id="barVolume">🔊</button>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70" />
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">🎵</span>
+    <span id="toastMsg">Now Playing!</span>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+  // ============================================================
+  //  HERO BANNER — PLAYER JS
+  // ============================================================
+
+  // ---- State ----
+  const hero = {
+    isPlaying: false,
+    interval: null,
+    shuffleOn: false,
+    repeatOn: false,
+    songs: [
+      { id: 4, title: 'Chhod Diya', artist: 'Arijit Singh', img: 'images/singer/arijitsingh.jpg', flag:'🇮🇳' },
+      { id: 46, title: 'Starboy', artist: 'The Weeknd', img: 'images/singer/the weeknd.jfif', flag:'🌐' },
+      { id: 1, title: 'Jo Tu Na Mila', artist: 'Asim Azhar', img: 'images/singer/asim azhar.jfif', flag:'🇵🇰' },
+      { id: 24, title: 'Diamonds', artist: 'Rihanna', img: 'images/singer/Rihanna.jfif', flag:'🌐' },
+    ],
+    currentIdx: 0
+  };
+
+  function fmt(s) {
+    if (isNaN(s)) return '0:00';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2,'0')}`;
+  }
+
+  // ---- Build Waveform ----
+  function buildWaveform(containerId, count = 36, isFs = false) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const b = document.createElement('div');
+      b.className = isFs ? 'fs-wave-bar' : 'wave-bar';
+      const maxH = Math.random() * (isFs ? 42 : 28) + 6;
+      const dur  = (Math.random() * 0.5 + 0.4).toFixed(2);
+      b.style.cssText = `
+        --h: ${maxH}px;
+        --dur: ${dur}s;
+        height: ${maxH * (Math.random() * 0.6 + 0.3)}px;
+        animation-delay: ${(i * 0.04).toFixed(2)}s;
+        opacity: 0.5;
+      `;
+      el.appendChild(b);
+    }
+  }
+
+  // ---- Progress Timer ----
+  function startTimer() {
+    clearInterval(hero.interval);
+    hero.interval = setInterval(() => {
+      // Sync with real state audio
+      if (typeof state !== 'undefined' && state.audio && state.currentSong) {
+        hero.isPlaying = !state.audio.paused;
+        const e = state.audio.currentTime || 0;
+        const t = state.audio.duration || 1;
+        hero.progress = (e / t) * 100;
+        
+        const mf = document.getElementById('miniProgressFill');
+        if (mf) mf.style.width = hero.progress + '%';
+        const mc = document.getElementById('miniCurrentTime');
+        if (mc) mc.textContent = fmt(e);
+        const md = document.getElementById('miniDuration');
+        if (md) md.textContent = fmt(t);
+
+        const ff = document.getElementById('fsProgressFill');
+        if (ff) ff.style.width = hero.progress + '%';
+        const fc = document.getElementById('fsCurrentTime');
+        if (fc) fc.textContent = fmt(e);
+        const fd = document.getElementById('fsDuration');
+        if (fd) fd.textContent = fmt(t);
+        
+        syncPlayBtns();
+        syncWaveforms();
+      }
+    }, 500);
+  }
+
+  // ---- Toggle Play ----
+  function toggleMiniPlay() {
+    if (typeof playSong === 'function' && typeof togglePlay === 'function') {
+      const realSongId = hero.songs[hero.currentIdx].id;
+      if (!state.currentSong || state.currentSong.id !== realSongId) {
+        playSong(realSongId);
+      } else {
+        togglePlay();
+      }
+    }
+  }
+
+  function toggleFsPlay() { toggleMiniPlay(); }
+
+  function syncPlayBtns() {
+    const icon = hero.isPlaying ? '⏸' : '▶';
+    ['miniPlayBtn','fsPlayBtn'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = icon;
+    });
+  }
+
+  function syncWaveforms() {
+    ['miniWaveform','fsWaveform'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('playing', hero.isPlaying);
+    });
+    // FS album spin
+    const fsA = document.getElementById('fsAlbum');
+    if (fsA) fsA.classList.toggle('spinning', hero.isPlaying);
+  }
+
+  // ---- Next / Prev ----
+  function heroNext() {
+    if (hero.shuffleOn) hero.currentIdx = Math.floor(Math.random() * hero.songs.length);
+    else hero.currentIdx = (hero.currentIdx + 1) % hero.songs.length;
+    loadHeroSong();
+  }
+
+  function miniNext() { heroNext(); }
+
+  function miniPrev() {
+    hero.currentIdx = (hero.currentIdx - 1 + hero.songs.length) % hero.songs.length;
+    loadHeroSong();
+  }
+
+  function loadHeroSong() {
+    const s = hero.songs[hero.currentIdx];
+    
+    // Play actual audio
+    if (typeof playSong === 'function') {
+      playSong(s.id);
+    }
+
+    // Update mini card
+    const mImg = document.getElementById('miniAlbumImg');
+    if (mImg) { mImg.src = s.img; mImg.onerror = () => { mImg.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'; }; }
+    const mT = document.getElementById('miniTitle');
+    if (mT) mT.textContent = s.title;
+    const mA = document.getElementById('miniArtist');
+    if (mA) mA.textContent = s.artist;
+
+    // Update FS
+    const fImg = document.getElementById('fsAlbumImg');
+    if (fImg) { fImg.src = s.img; fImg.onerror = () => { fImg.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'; }; }
+    const fT = document.getElementById('fsTitle');
+    if (fT) fT.textContent = s.title;
+    const fA = document.getElementById('fsArtist');
+    if (fA) fA.textContent = s.artist;
+
+    // Update FS blurred bg
+    const fsBg = document.getElementById('fsBg');
+    if (fsBg) fsBg.style.backgroundImage = `url('${s.img}')`;
+
+    syncPlayBtns();
+    syncWaveforms();
+  }
+
+  // ---- Seek ----
+  function seekProgress(e, track) {
+    const rect = track.getBoundingClientRect();
+    const pct = ((e.clientX - rect.left) / rect.width) * 100;
+    if (typeof state !== 'undefined' && state.audio && state.audio.duration) {
+      state.audio.currentTime = (pct / 100) * state.audio.duration;
+    }
+  }
+
+  function seekFsProgress(e, track) { seekProgress(e, track); }
+
+  // ---- Fullscreen ----
+  function openFullscreenPlayer() {
+    const ov = document.getElementById('fullscreenOverlay');
+    if (!ov) return;
+    ov.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Sync state
+    syncPlayBtns();
+    syncWaveforms();
+    updateProgressUI();
+  }
+
+  function closeFullscreenPlayer() {
+    const ov = document.getElementById('fullscreenOverlay');
+    if (!ov) return;
+    ov.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // ---- Toggle ctrl buttons ----
+  function toggleCtrl(btn) {
+    btn.classList.toggle('active');
+    if (btn.id === 'miniShuffle' || btn.id === 'fsShuffle') {
+      hero.shuffleOn = !hero.shuffleOn;
+      ['miniShuffle','fsShuffle'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', hero.shuffleOn);
+        if (el) el.style.color = hero.shuffleOn ? '#a855f7' : '';
+      });
+    }
+    if (btn.id === 'miniRepeat' || btn.id === 'fsRepeat') {
+      hero.repeatOn = !hero.repeatOn;
+      ['miniRepeat','fsRepeat'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', hero.repeatOn);
+        if (el) el.style.color = hero.repeatOn ? '#a855f7' : '';
+      });
+    }
+  }
+
+  function toggleFsCtrl(btn) { toggleCtrl(btn); }
+
+  function toggleFsMute() {
+    if (typeof toggleMute === 'function') {
+      toggleMute();
+      const icon = document.getElementById('fsVolIcon');
+      if (icon) icon.textContent = state.audio.muted ? '🔇' : '🔊';
+    }
+  }
+
+  function toggleHeart(btn) {
+    const isLiked = btn.textContent === '♥';
+    btn.textContent = isLiked ? '♡' : '♥';
+    btn.classList.toggle('liked', !isLiked);
+    btn.style.color = isLiked ? '' : '#ff00cc';
+    btn.style.textShadow = isLiked ? '' : '0 0 10px #ff00cc';
+  }
+
+  // ---- Volume ----
+  document.addEventListener('DOMContentLoaded', () => {
+    const vol = document.getElementById('fsVolume');
+    if (vol) {
+      vol.addEventListener('input', (e) => {
+        if (typeof setVolume === 'function') {
+          setVolume(e.target.value);
+        }
+        const lbl = vol.nextElementSibling;
+        if (lbl) lbl.textContent = Math.round(e.target.value) + '%';
+      });
+    }
+  });
+
+  // ---- Keyboard Shortcuts ----
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT') return;
+    if (e.code === 'Space') { e.preventDefault(); toggleMiniPlay(); }
+    if (e.code === 'ArrowRight') miniNext();
+    if (e.code === 'ArrowLeft') miniPrev();
+    if (e.code === 'Escape') closeFullscreenPlayer();
+    if (e.code === 'KeyF') openFullscreenPlayer();
+  });
+
+  // ---- Particles ----
+  function spawnParticles() {
+    const container = document.getElementById('particles');
+    if (!container) return;
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 5 + 2;
+      p.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        left: ${Math.random() * 100}%;
+        background: ${Math.random() > 0.5 ? '#a855f7' : '#ff00cc'};
+        animation-duration: ${Math.random() * 10 + 8}s;
+        animation-delay: ${Math.random() * 6}s;
+        box-shadow: 0 0 ${size * 3}px ${Math.random() > 0.5 ? '#a855f7' : '#ff00cc'};
+      `;
+      container.appendChild(p);
+    }
+  }
+
+  // ---- Trending songs  ----
+  const DEMO_SONGS = [
+    { title:'Pasoori', artist:'Ali Sethi', img:'images/singer/atif aslam.jfif', dur:'3:50', flag:'🇵🇰' },
+    { title:'Tum Hi Ho', artist:'Arijit Singh', img:'images/singer/arijitsingh.jpg', dur:'4:22', flag:'🇮🇳' },
+    { title:'Blinding Lights', artist:'The Weeknd', img:'images/singer/the weeknd.jfif', dur:'3:20', flag:'🌐' },
+    { title:'Afreen Afreen', artist:'Rahat Fateh Ali', img:'images/singer/rahat fateh ali khan.jpg', dur:'5:23', flag:'🇵🇰' },
+    { title:'Kesariya', artist:'Arijit Singh', img:'images/singer/arijitsingh.jpg', dur:'4:28', flag:'🇮🇳' },
+    { title:'Shape of You', artist:'Ed Sheeran', img:'images/singer/Ed Sheeran.jfif', dur:'3:54', flag:'🌐' },
+    { title:'Dilbar', artist:'Neha Kakkar', img:'images/singer/Neha Kakkar.jfif', dur:'3:22', flag:'🇮🇳' },
+    { title:'Poh Naswam Pa Zan', artist:'Shah Farooq', img:'images/singer/shah farooq', dur:'4:15', flag:'🇵🇰' },
+      
+
+  ];
+
+  function buildTrendingSongs() {
+    const grid = document.getElementById('trendingSongs');
+    if (!grid) return;
+    grid.innerHTML = DEMO_SONGS.map((s, i) => `
+      <div onclick="heroLoadByIndex(${i})" style="
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 16px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+      " onmouseover="this.style.transform='translateY(-7px)';this.style.boxShadow='0 0 28px rgba(168,85,247,0.4)';this.style.borderColor='rgba(168,85,247,0.4)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(255,255,255,0.07)'">
+        <div style="position:relative;aspect-ratio:1;overflow:hidden;">
+          <img src="${s.img}" alt="${s.title}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;"
+               onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'"
+               onmouseover="this.style.transform='scale(1.08)'"
+               onmouseout="this.style.transform=''" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,16,0.85) 0%,transparent 60%);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;"
+               onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+            <div style="width:50px;height:50px;background:linear-gradient(135deg,#ff00cc,#7b2ff7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 0 25px rgba(255,0,204,0.5);">▶</div>
+          </div>
+        </div>
+        <div style="padding:14px;">
+          <div style="font-size:0.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;">${s.flag} ${s.title}</div>
+          <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:10px;">${s.artist}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.72rem;color:rgba(255,255,255,0.3);font-family:'Orbitron',sans-serif;">${s.dur}</span>
+            <span style="color:rgba(255,255,255,0.3);font-size:0.9rem;cursor:pointer;transition:color 0.3s;"
+                  onmouseover="this.style.color='#ff00cc'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">♡</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function heroLoadByIndex(i) {
+    if (i < hero.songs.length) {
+      hero.currentIdx = i % hero.songs.length;
+      loadHeroSong();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // ---- Categories ----
+  function buildCategories() {
+    const grid = document.getElementById('catGrid');
+    if (!grid) return;
+    const cats = [
+      { name:'English', count:'18.6K', flag:'🌐', img:'images/singer/the weeknd.jfif', href:'categories.html#english' },
+      { name:'Urdu', count:'15.2K', flag:'🇵🇰', img:'images/singer/atif aslam.jfif', href:'categories.html#urdu' },
+      { name:'Hindi', count:'25.8K', flag:'🇮🇳', img:'images/singer/arijitsingh.jpg', href:'categories.html#hindi' },
+      { name:'Pashto', count:'8.5K', flag:'🇵🇰', img:'images/singer/Shan khan.jfif', href:'categories.html#pashto' },
+    ];
+    grid.innerHTML = cats.map(c => `
+      <a href="${c.href}" style="
+        display:block;
+        border-radius:20px;
+        overflow:hidden;
+        cursor:pointer;
+        position:relative;
+        min-height:200px;
+        transition:all 0.3s;
+        text-decoration:none;
+      " onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 0 40px rgba(168,85,247,0.5)'"
+         onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;inset:0;background-image:url('${c.img}');background-size:cover;background-position:center;filter:brightness(0.4);transition:all 0.5s;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,16,0.92) 0%,transparent 60%);"></div>
+        <div style="position:relative;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;min-height:200px;">
+          <span style="font-size:2.2rem;margin-bottom:6px;">${c.flag}</span>
+          <div style="font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:3px;">${c.name}</div>
+          <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${c.count} Songs</div>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  // ---- INIT ----
+  document.addEventListener('DOMContentLoaded', () => {
+    // Build waveforms
+    buildWaveform('miniWaveform', 34, false);
+    buildWaveform('fsWaveform', 40, true);
+
+    // Particles
+    spawnParticles();
+
+    // Trending + categories
+    buildTrendingSongs();
+    buildCategories();
+
+    // Start timer (auto-playing)
+    syncPlayBtns();
+    syncWaveforms();
+    startTimer();
+
+    // FS bg sync with first song
+    const fsBg = document.getElementById('fsBg');
+    if (fsBg) fsBg.style.backgroundImage = `url('${hero.songs[0].img}')`;
+
+    // Volume init
+    const vol = document.getElementById('fsVolume');
+    if (vol && typeof state !== 'undefined') vol.value = state.volume * 100;
+
+    // ---- Navbar scroll shrink ----
+    const navbar = document.getElementById('mainNavbar');
+    window.addEventListener('scroll', () => {
+      if (!navbar) return;
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  });
+
+  // ---- Mobile Nav Toggle ----
+  function toggleMobileNav() {
+    const links = document.getElementById('mainNavLinks');
+    const btn   = document.getElementById('hamburgerBtn');
+    if (!links || !btn) return;
+    links.classList.toggle('open');
+    btn.classList.toggle('open');
+    // close on outside click
+    if (links.classList.contains('open')) {
+      setTimeout(() => {
+        document.addEventListener('click', closeMobileNavOutside, { once: true });
+      }, 10);
+    }
+  }
+
+  function closeMobileNavOutside(e) {
+    const links = document.getElementById('mainNavLinks');
+    const btn   = document.getElementById('hamburgerBtn');
+    const navbar = document.getElementById('mainNavbar');
+    if (navbar && !navbar.contains(e.target)) {
+      if (links) links.classList.remove('open');
+      if (btn)   btn.classList.remove('open');
+    }
+  }
+  </script>
+</body>
+</html>

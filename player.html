@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SonicWave Music Player - Play your favorite songs with our premium cyberpunk audio player." />
+  <title>Music Player | SonicWave</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>" />
+  <style>
+    /* ===== PLAYER PAGE EXTRA STYLES ===== */
+    .player-page-layout {
+      height: 100vh;
+      padding-top: var(--nav-height);
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .player-main {
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .player-sidebar {
+      background: rgba(13, 13, 26, 0.9);
+      border-left: 1px solid var(--border-glass);
+      padding: 2rem 1.5rem;
+      overflow-y: hidden;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .player-sidebar::-webkit-scrollbar { 
+      width: 4px; 
+    }
+    .player-sidebar::-webkit-scrollbar-track { 
+      background: transparent;
+     }
+    .player-sidebar::-webkit-scrollbar-thumb {
+       background: rgba(168,85,247,0.4); 
+       border-radius: 2px; 
+      }
+
+
+    .player-bg-blur {
+      position: fixed;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: blur(80px) brightness(0.12) saturate(1.5);
+      transform: scale(1.3);
+      transition: background-image 1s ease;
+      z-index: 0;
+    }
+
+    .player-bg-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 6, 16, 0.72);
+      z-index: 0;
+    }
+
+    .album-art-container {
+      width: 280px;
+      max-width: 100%;
+      margin-bottom: 1.2rem;
+    }
+
+    .album-art-frame {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(168, 85, 247, 0.5), 0 40px 80px rgba(0,0,0,0.6);
+      aspect-ratio: 1;
+    }
+
+    .album-art-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .album-art-frame.spinning img {
+      animation: slow-spin 20s linear infinite;
+    }
+
+    @keyframes slow-spin {
+      from { transform: rotate(0deg) scale(1.05); }
+      to { transform: rotate(360deg) scale(1.05); }
+    }
+
+    .album-art-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), transparent 60%);
+      z-index: 1;
+      pointer-events: none;
+      border-radius: 24px;
+    }
+
+    .album-art-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(168, 85, 247, 0.4);
+      border-radius: 24px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Floating vinyl rings */
+    .vinyl-orbit {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(168, 85, 247, 0.25);
+      animation: orbit-spin 10s linear infinite;
+    }
+
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .track-info-full {
+      text-align: center;
+      margin-bottom: 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .track-category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(168,85,247,0.15);
+      border: 1px solid rgba(168,85,247,0.35);
+      color: var(--neon-purple);
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .track-name-full {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 900;
+      margin-bottom: 0.2rem;
+      line-height: 1.2;
+    }
+
+    .track-artist-full {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    /* Waveform visualizer */
+    .visualizer {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 30px;
+      justify-content: center;
+      margin: 0.5rem 0;
+    }
+
+    .vis-bar {
+      width: 4px;
+      border-radius: 4px;
+      background: linear-gradient(to top, #ff00cc, #a855f7);
+      opacity: 0.3;
+      height: 6px;
+      transition: height 0.15s ease;
+    }
+
+    .visualizer.active .vis-bar {
+      opacity: 1;
+      animation: vis-bounce var(--spd, 0.8s) ease-in-out infinite alternate;
+    }
+
+    @keyframes vis-bounce {
+      from { height: 6px; }
+      to { height: var(--vh, 40px); }
+    }
+
+    /* Progress */
+    .player-progress-full {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 1rem;
+    }
+
+    .progress-track {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .progress-track-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff00cc, #7b2ff7);
+      border-radius: 6px;
+      width: 0%;
+      transition: width 0.15s linear;
+      box-shadow: 0 0 10px rgba(255,0,204,0.5);
+      position: relative;
+    }
+
+    .progress-track-fill::after {
+      content: '';
+      position: absolute;
+      right: -7px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #ff00cc;
+      transition: transform 0.2s ease;
+    }
+
+    .progress-track:hover .progress-track-fill::after {
+      transform: translateY(-50%) scale(1.3);
+    }
+
+    .progress-track-times {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .controls-full {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .ctrl-full-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-secondary);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .ctrl-full-btn:hover {
+      color: white;
+      border-color: rgba(168,85,247,0.5);
+      box-shadow: 0 0 20px rgba(168,85,247,0.3);
+      transform: scale(1.1);
+    }
+
+    .ctrl-full-btn.active {
+      color: var(--neon-purple);
+      border-color: rgba(168,85,247,0.6);
+      background: rgba(168,85,247,0.12);
+    }
+
+    .play-btn-full {
+      width: 76px;
+      height: 76px;
+      background: linear-gradient(135deg, #ff00cc, #7b2ff7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 0 35px rgba(255,0,204,0.5), 0 0 70px rgba(168,85,247,0.2);
+      color: white;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    .play-btn-full:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 55px rgba(255,0,204,0.7), 0 0 100px rgba(168,85,247,0.3);
+    }
+
+    /* Volume Row */
+    .volume-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .vol-icon {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .vol-icon:hover { color: white; }
+
+    .vol-range {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 5px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .vol-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--neon-purple);
+      box-shadow: 0 0 8px var(--glow-purple);
+      cursor: pointer;
+    }
+
+    /* Sidebar */
+    .sidebar-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .player-page-layout { grid-template-columns: 1fr; }
+      .player-sidebar { border-left: none; border-top: 1px solid var(--border-glass); }
+      .album-art-container { width: 260px; }
+    }
+
+    @media (max-width: 480px) {
+      .player-main { padding: 2rem 1.5rem; }
+      .album-art-container { width: 220px; }
+      .play-btn-full { width: 64px; height: 64px; font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOADING -->
+  <div id="loading-screen">
+    <div class="loader-logo">SONICWAVE</div>
+    <div class="loader-bars">
+      <div class="loader-bar"></div><div class="loader-bar"></div>
+      <div class="loader-bar"></div><div class="loader-bar"></div>
+      <div class="loader-bar"></div><div class="loader-bar"></div>
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- ==============================
+       NAVBAR
+  ================================= -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="nav-inner">
+
+      <!-- LOGO -->
+      <a href="index.html" class="logo">
+        <div class="logo-icon-wrap">
+          <div class="logo-bars">
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+          </div>
+        </div>
+        SonicWave
+      </a>
+
+      <!-- NAV LINKS -->
+      <ul class="nav-links" id="mainNavLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="player.html" class="active">Player</a></li>
+      </ul>
+
+      <!-- RIGHT GROUP -->
+      <div class="nav-right">
+        <a href="explore.html" class="nav-search-btn" title="Search">🔍</a>
+        <div class="nav-sep"></div>
+        <a href="login.html" class="nav-cta">
+          <span class="nav-cta-dot"></span>
+          Login / Signup
+        </a>
+        <!-- Hamburger (mobile) -->
+        <div class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- DYNAMIC BG BLUR -->
+  <div class="player-bg-blur" id="playerBgBlur" style="background-image:url('images/singer/arijitsingh.jpg');"></div>
+  <div class="player-bg-overlay"></div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="player-page-layout">
+
+    <!-- ===== LEFT: PLAYER MAIN ===== -->
+    <div class="player-main">
+
+      <!-- Album Art -->
+      <div class="album-art-container">
+        <div class="album-art-frame" id="albumArtFrame">
+          <img src="images/singer/arijitsingh.jpg" alt="Album Art" id="albumArtImg" />
+        </div>
+      </div>
+
+      <!-- Track Info -->
+      <div class="track-info-full" style="position:relative;">
+        <button class="icon-btn fullscreen-btn" id="openFullscreen" onclick="openFullscreenPlayer()" title="Fullscreen Player ⛶" style="position:absolute; top:0; right:0;">⛶</button>
+        <div class="track-category-badge" id="trackCatBadge">🇮🇳 Indian</div>
+        <h1 class="track-name-full" id="trackNameFull">Chhod Diya</h1>
+        <p class="track-artist-full" id="trackArtistFull">Arijit Singh</p>
+      </div>
+
+      <!-- Waveform Visualizer -->
+      <div class="visualizer" id="visualizer">
+        <!-- bars injected by JS -->
+      </div>
+
+      <!-- Progress -->
+      <div class="player-progress-full">
+        <div class="progress-track" id="fullProgressTrack">
+          <div class="progress-track-fill" id="fullProgressFill"></div>
+        </div>
+        <div class="progress-track-times">
+          <span id="fullCurrentTime">0:00</span>
+          <span id="fullDuration">0:00</span>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls-full">
+        <button class="ctrl-full-btn" id="fullShuffle" title="Shuffle">🔀</button>
+        <button class="ctrl-full-btn" id="fullPrev" title="Previous">⏮</button>
+        <button class="play-btn-full" id="fullPlayBtn" title="Play/Pause">▶</button>
+        <button class="ctrl-full-btn" id="fullNext" title="Next">⏭</button>
+        <button class="ctrl-full-btn" id="fullRepeat" title="Repeat">🔁</button>
+      </div>
+
+      <!-- Volume -->
+      <div class="volume-row">
+        <span class="vol-icon" id="fullVolIcon">🔊</span>
+        <input type="range" class="vol-range" id="fullVolSlider" min="0" max="100" value="70" />
+        <span style="font-size:0.78rem;color:var(--text-muted);font-family:'Orbitron',sans-serif;" id="fullVolLabel">70%</span>
+      </div>
+
+    </div>
+
+    <!-- ===== RIGHT: SIDEBAR QUEUE ===== -->
+    <div class="player-sidebar">
+      <div class="sidebar-title">🎵 Up Next</div>
+      <div class="queue-list" id="queueList">
+        <!-- JS injects queue -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==============================
+       FULLSCREEN PLAYER OVERLAY
+  ================================= -->
+  <div class="fullscreen-overlay" id="fullscreenOverlay">
+
+    <!-- Blurred BG -->
+    <div class="fs-bg" id="fsBg"></div>
+    <div class="fs-overlay"></div>
+
+    <!-- Close Button -->
+    <button class="fs-close-btn" onclick="closeFullscreenPlayer()" title="Exit Fullscreen">✕</button>
+
+    <!-- Content -->
+    <div class="fs-content">
+
+      <!-- FS Album Art -->
+      <div class="fs-album" id="fsAlbum">
+        <img src="images/singer/arijitsingh.jpg"
+             alt="Album Art"
+             id="fsAlbumImg"
+             onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'" />
+      </div>
+
+      <!-- FS Player Panel -->
+      <div class="fs-panel">
+
+        <div>
+          <div class="fs-badge">Now Playing</div>
+          <h2 class="fs-title" id="fsTitle">Chhod Diya</h2>
+          <div class="fs-artist">
+            <span id="fsArtist">Arijit Singh</span>
+            <span class="verified" style="font-size:1rem;">✓</span>
+          </div>
+        </div>
+
+        <!-- FS Waveform -->
+        <div class="fs-waveform" id="fsWaveform"></div>
+
+        <!-- FS Progress -->
+        <div>
+          <div class="fs-progress-bar" id="fsProgressBar" onclick="seekFsProgress(event, this)">
+            <div class="fs-progress-fill" id="fsProgressFill"></div>
+          </div>
+          <div class="fs-times">
+            <span id="fsCurrentTime">0:00</span>
+            <span id="fsDuration">0:00</span>
+          </div>
+        </div>
+
+        <!-- FS Controls -->
+        <div class="fs-controls">
+          <button class="fs-ctrl" id="fsShuffle" onclick="toggleFsCtrl(this)" title="Shuffle">⇄</button>
+          <button class="fs-ctrl" onclick="playPrev()" title="Previous">⏮</button>
+          <button class="fs-play-btn" id="fsPlayBtn" onclick="togglePlay()">⏸</button>
+          <button class="fs-ctrl" onclick="playNext()" title="Next">⏭</button>
+          <button class="fs-ctrl" id="fsRepeat" onclick="toggleFsCtrl(this)" title="Repeat">↺</button>
+        </div>
+
+        <!-- Volume -->
+        <div class="fs-volume">
+          <span class="fs-vol-icon" id="fsVolIcon" onclick="toggleMute()">🔊</span>
+          <input type="range" class="fs-vol-range" id="fsVolume" min="0" max="100" value="70" />
+          <span style="font-size:0.78rem;color:rgba(255,255,255,0.4);font-family:'Orbitron',sans-serif;min-width:32px;">70%</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">🎵</span>
+    <span id="toastMsg">Now Playing!</span>
+  </div>
+
+  <script src="js/script.js"></script>
+
+</body>
+</html>

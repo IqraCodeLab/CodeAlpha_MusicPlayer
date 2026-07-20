@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Login to SonicWave – your premium music streaming platform." />
+  <title>Login – SonicWave</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink: #ff00cc; --purple: #a855f7; --dark: #060610;
+      --glass: rgba(255,255,255,0.05); --border: rgba(255,255,255,0.1);
+    }
+    html, body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── AUTH PAGE BACKGROUND ── */
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 1rem 1rem;
+      position: relative;
+    }
+    .auth-bg {
+      position: fixed;
+      inset: 0;
+      background-image: url('images/person.jpeg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5) saturate(1.3);
+      z-index: 0;
+    }
+    .auth-overlay {
+      position: fixed;
+      
+      z-index: 1;
+    }
+
+    /* ── CARD ── */
+    .auth-card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 430px;
+      background: rgba(10,10,24,0.82);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(168,85,247,0.28);
+      border-radius: 20px;
+      padding: 1.8rem 2rem 1.5rem;
+      box-shadow:
+        0 0 0 1px rgba(255,0,204,0.06),
+        0 0 60px rgba(168,85,247,0.18),
+        0 30px 70px rgba(0,0,0,0.55);
+    }
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.7), rgba(255,0,204,0.7), transparent);
+      border-radius: 24px 24px 0 0;
+    }
+
+    /* ── LOGO ── */
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .auth-logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg,rgba(255,0,204,0.15),rgba(168,85,247,0.2));
+      border: 1px solid rgba(168,85,247,0.35);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .auth-logo-bars { display: flex; align-items: flex-end; gap: 2px; height: 18px; }
+    .auth-logo-bars span {
+      width: 3px; border-radius: 2px;
+      background: linear-gradient(to top, #ff00cc, #a855f7);
+    }
+    .auth-logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff00cc, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    
+    .auth-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+    .auth-sub {
+      text-align: center;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 2rem;
+    }
+
+    /* FORM */
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.97rem;
+      font-family: 'Outfit', sans-serif;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .form-group input:focus {
+      border-color: rgba(168,85,247,0.7);
+      box-shadow: 0 0 18px rgba(168,85,247,0.18);
+    }
+    .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+
+    .forgot-link {
+      display: block;
+      text-align: right;
+      font-size: 0.82rem;
+      color: var(--purple);
+      text-decoration: none;
+      margin-top: -0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .forgot-link:hover { color: var(--pink); }
+
+    /* ── SUBMIT BUTTON ── */
+    .btn-auth {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #ff00cc, #7b2ff7);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255,0,204,0.4), 0 8px 25px rgba(123,47,247,0.3);
+      transition: transform 0.2s, box-shadow 0.3s;
+      letter-spacing: 0.5px;
+    }
+    .btn-auth:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(255,0,204,0.6), 0 12px 35px rgba(123,47,247,0.4);
+    }
+
+    /* ── DIVIDER ── */
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 1.5rem 0;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.8rem;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* ── SWITCH ── */
+    .auth-switch {
+      text-align: center;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 1.2rem;
+    }
+    .auth-switch a {
+      color: var(--pink);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .auth-switch a:hover { color: var(--purple); }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .auth-card { animation: fadeUp 0.5s ease both; }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="auth-bg"></div>
+  <div class="auth-overlay"></div>
+
+  <!-- NAVBAR (identical across all pages) -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon-wrap">
+          <div class="logo-bars">
+            <div class="logo-bar"></div><div class="logo-bar"></div>
+            <div class="logo-bar"></div><div class="logo-bar"></div>
+            <div class="logo-bar"></div>
+          </div>
+        </div>
+        SonicWave
+      </a>
+      <ul class="nav-links" id="mainNavLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="player.html">Player</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="explore.html" class="nav-search-btn" title="Search">🔍</a>
+        <div class="nav-sep"></div>
+        <a href="login.html" class="nav-cta active">
+          <span class="nav-cta-dot"></span>Login / Signup
+        </a>
+        <div class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LOGIN FORM -->
+  <div class="auth-page">
+    <div class="auth-card">
+
+      <!-- Logo -->
+      <div class="auth-logo">
+        <div class="auth-logo-icon">
+          <div class="auth-logo-bars">
+            <span style="height:8px"></span>
+            <span style="height:14px"></span>
+            <span style="height:18px"></span>
+            <span style="height:11px"></span>
+            <span style="height:6px"></span>
+          </div>
+        </div>
+        <span class="auth-logo-text">SonicWave</span>
+      </div>
+
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-sub">Sign in to continue listening</p>
+
+      <form id="loginForm" action="#" method="POST" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input id="loginEmail" type="email" name="email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" type="password" name="password" placeholder="Enter your password" required />
+        </div>
+
+        <a href="#" class="forgot-link">Forgot password?</a>
+
+        <button type="submit" class="btn-auth">Sign In ➔</button>
+      </form>
+
+      <div class="auth-divider">or</div>
+
+      <div class="auth-switch">
+        Don't have an account? <a href="register.html">Create Account</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.querySelector('.btn-auth');
+      btn.textContent = 'Signing in…';
+      btn.style.opacity = '0.7';
+      setTimeout(() => {
+        alert('Login successful! Welcome back to SonicWave 🎵');
+        window.location.href = 'index.html';
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
