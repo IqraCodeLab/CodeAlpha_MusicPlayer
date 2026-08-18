@@ -2,6 +2,18 @@
 
 SonicWave is a premium music streaming web application that delivers high-quality audio with a stunning, modern user interface. Designed to cater to every mood, SonicWave brings your favorite tracks, dynamic playlists, and fresh genres right to your fingertips.
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="readme/home1.png" alt="SonicWave Home 1" width="100%">
+</p>
+<p align="center">
+  <img src="readme/home2.png" alt="SonicWave Home 2" width="100%">
+</p>
+<p align="center">
+  <img src="readme/home3.png" alt="SonicWave Home 3" width="100%">
+</p>
+
 ## ✨ Features
 
 - **Modern UI/UX:** A visually striking dark-themed interface with vibrant gradient accents, glassmorphism elements, and smooth micro-animations.
