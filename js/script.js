@@ -29,12 +29,12 @@ const SONGS = [
   { id: 18, title: 'Khamoshiyan', artist: 'Arijit Singh', category: 'hindi', flag: '🇮🇳', duration: '5:35', image: 'images/singer/arijitsingh.jpg', file: 'songs/Khamoshiyan (Title Song) Lyrics _ Arijit Singh _ Rashmi S _ Jeet G _ Ali Fazal _ Sapna P _ Gurmeet C(M4A_128K).m4a', tags: ['romantic', 'classic'], year: 2015, plays: 82100 },
   { id: 19, title: 'Larsha Pekhawar', artist: 'Ali Zafar ft. Gul Panra', category: 'pashto', flag: '🇵🇰', duration: '3:50', image: 'images/singer/Ali Zafar.jfif', file: 'songs/Larsha Pekhawar _ Ali Zafar ft. Gul Panra _ Fortitude Pukhtoon Core _ Pashto Song(M4A_128K).m4a', tags: ['pashto', 'trending'], year: 2021, plays: 73600 },
   { id: 20, title: 'Mile Ho Tum', artist: 'Neha Kakkar', category: 'hindi', flag: '🇮🇳', duration: '3:30', image: 'images/singer/Neha Kakkar.jfif', file: 'songs/Mile Ho Tum - Reprise Version _ Neha Kakkar _ Tony Kakkar _ Fever _ Gaurav Jang(M4A_128K).m4a', tags: ['sad', 'acoustic'], year: 2016, plays: 54300 },
-  { id: 21, title: 'Pa Ma Mayana', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '3:22', image: 'images/singer/shah farooq', file: 'songs/Pashto New Songs 2020 _ Shah Farooq New Tappy Tapay Tappaezy 2020 _ Pa Ma Mayana Khude De Mar Ka(MP3_160K).mp3', tags: ['pashto', 'tappy'], year: 2020, plays: 69800 },
-  { id: 22, title: 'Poh Naswam Pa Zan', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '4:15', image: 'images/singer/shah farooq', file: 'songs/Pashto New Songs 2025 _ Poh Naswam Pa Zan Bande _ Shah Farooq New Songs 2025 _ Pashto Songs 2025(MP3_160K).mp3', tags: ['pashto', 'new'], year: 2025, plays: 92000 },
+  { id: 21, title: 'Pa Ma Mayana', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '3:22', image: 'images/singer/shah farooq.jpg, file: 'songs/Pashto New Songs 2020 _ Shah Farooq New Tappy Tapay Tappaezy 2020 _ Pa Ma Mayana Khude De Mar Ka(MP3_160K).mp3', tags: ['pashto', 'tappy'], year: 2020, plays: 69800 },
+  { id: 22, title: 'Poh Naswam Pa Zan', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '4:15', image: 'images/singer/shah farooq.jpg, file: 'songs/Pashto New Songs 2025 _ Poh Naswam Pa Zan Bande _ Shah Farooq New Songs 2025 _ Pashto Songs 2025(MP3_160K).mp3', tags: ['pashto', 'new'], year: 2025, plays: 92000 },
   { id: 23, title: 'Regardless', artist: 'Asim Azhar', category: 'urdu', flag: '🇵🇰', duration: '3:45', image: 'images/singer/asim azhar.jfif', file: 'songs/REGARDLESS - Asim Azhar (Official Video)(M4A_128K).m4a', tags: ['trending', 'pop'], year: 2023, plays: 86400 },
   { id: 24, title: 'Diamonds', artist: 'Rihanna', category: 'english', flag: '🌐', duration: '3:45', image: 'images/singer/Rihanna.jfif', file: 'songs/Rihanna - Diamonds(M4A_128K).m4a', tags: ['pop', 'iconic'], year: 2012, plays: 61700 },
   { id: 25, title: 'We Found Love', artist: 'Rihanna', category: 'english', flag: '🌐', duration: '3:35', image: 'images/singer/Rihanna.jfif', file: 'songs/Rihanna - We Found Love ft. Calvin Harris(M4A_128K).m4a', tags: ['dance', 'pop'], year: 2011, plays: 98700 },
-  { id: 26, title: 'Ek Nazar Nazar', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '3:10', image: 'images/singer/shah farooq', file: 'songs/Shah Farooq New Urdo Pashto Mix Song 2023 _Ek Nazar Nazar _Full 👍 2023 Tik Tok Songs(MP3_160K).mp3', tags: ['mix', 'pashto'], year: 2023, plays: 200000 },
+  { id: 26, title: 'Ek Nazar Nazar', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '3:10', image: 'images/singer/shah farooq.jpg, file: 'songs/Shah Farooq New Urdo Pashto Mix Song 2023 _Ek Nazar Nazar _Full 👍 2023 Tik Tok Songs(MP3_160K).mp3', tags: ['mix', 'pashto'], year: 2023, plays: 200000 },
   { id: 27, title: 'Taaron Ke Shehar', artist: 'Neha Kakkar', category: 'hindi', flag: '🇮🇳', duration: '4:02', image: 'images/singer/Neha Kakkar.jfif', file: 'songs/Taaron Ke Shehar Song_ Neha Kakkar_ Sunny Kaushal _ Jubin Nautiyal_Jaani _ Bhushan Kumar _ Arvindr K(M4A_128K).m4a', tags: ['romantic', 'sad'], year: 2020, plays: 120000 },
   { id: 28, title: 'Blank Space', artist: 'Taylor Swift', category: 'english', flag: '🌐', duration: '3:51', image: 'images/singer/taylor swift.jfif', file: 'songs/Taylor Swift - Blank Space(M4A_128K).m4a', tags: ['pop', 'trending'], year: 2014, plays: 89000 },
   { id: 29, title: 'Shake It Off', artist: 'Taylor Swift', category: 'english', flag: '🌐', duration: '3:39', image: 'images/singer/taylor swift.jfif', file: 'songs/Taylor Swift - Shake It Off(M4A_128K).m4a', tags: ['pop', 'dance'], year: 2014, plays: 112000 },
@@ -124,7 +124,7 @@ function createSongCard(song, index) {
     <div class="song-card animate-on-scroll" data-song-id="${song.id}" data-index="${index}">
       <div class="song-card-img">
         <img src="${song.image}" alt="${song.title}" loading="lazy" 
-             onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'" />
+             onerror="this.src='images/music.jpeg'" />
         <div class="song-card-overlay">
           <button class="play-btn ${isPlaying ? 'playing' : ''}" 
                   onclick="playSong(${song.id})" 
@@ -376,7 +376,7 @@ function updatePlayerBar(song) {
   const thumb = document.getElementById('barThumb');
   const title = document.getElementById('barTitle');
   const artist = document.getElementById('barArtist');
-  if (thumb) { thumb.src = song.image; thumb.onerror = () => { thumb.src = 'images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'; }; }
+  if (thumb) { thumb.src = song.image; thumb.onerror = () => { thumb.src = 'images/music.jpeg'; }; }
   if (title) title.textContent = song.title;
   if (artist) artist.textContent = song.artist;
 }
@@ -387,7 +387,7 @@ function updateAllPlayerUIs(song) {
   
   // Fullscreen sync
   const fsImg = document.getElementById('fsAlbumImg');
-  if (fsImg) { fsImg.src = song.image; fsImg.onerror = () => { fsImg.src = 'images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'; }; }
+  if (fsImg) { fsImg.src = song.image; fsImg.onerror = () => { fsImg.src = 'images/music.jpeg'; }; }
   const fsTitle = document.getElementById('fsTitle');
   if (fsTitle) fsTitle.textContent = song.title;
   const fsArtist = document.getElementById('fsArtist');
@@ -431,7 +431,7 @@ function updatePlayerPage(song) {
   const badge = document.getElementById('trackCatBadge');
   const bg = document.getElementById('playerBgBlur');
 
-  if (img) { img.src = song.image; img.onerror = () => { img.src = 'images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'; }; }
+  if (img) { img.src = song.image; img.onerror = () => { img.src = 'images/music.jpeg'; }; }
   if (name) name.textContent = song.title;
   if (artist) artist.textContent = song.artist;
   if (badge) badge.textContent = `${song.flag} ${song.category.charAt(0).toUpperCase() + song.category.slice(1)}`;
@@ -532,7 +532,7 @@ function updateQueueList() {
          onclick="playSong(${song.id})">
       <div class="queue-item-thumb">
         <img src="${song.image}" alt="${song.title}" 
-             onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'" />
+             onerror="this.src='images/music.jpeg'" />
       </div>
       <div class="queue-item-info">
         <h4>${song.flag} ${song.title}</h4>
@@ -566,7 +566,7 @@ function buildTopArtists() {
     <a href="explore.html?artist=${encodeURIComponent(artistName)}" class="artist-card">
       <div class="artist-img-wrapper">
         <img src="${artistImg}" alt="${artistName}" loading="lazy" 
-             onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'" />
+             onerror="this.src='images/music.jpeg'" />
       </div>
       <div class="artist-name">${artistName}</div>
     </a>

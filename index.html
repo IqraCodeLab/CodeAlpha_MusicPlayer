@@ -592,7 +592,7 @@
     .fs-bg {
       position: absolute;
       inset: 0;
-      background-image: url('images/WhatsApp Image 2026-07-19 at 9.51.23 PM (2).jpeg');
+      background-image: url('images/banner.jpeg');
       background-size: cover;
       background-position: center;
       filter: blur(50px) brightness(0.25) saturate(1.8);
@@ -1071,11 +1071,58 @@
       .nav-search-btn { display: none; }
       .nav-sep { display: none; }
       .navbar { height: 70px; }
+      .nav-links.open { top: 70px; }
       .hero { padding-top: 70px; }
+      .artists-grid { gap: 1.5rem; }
+      .artist-card, .artist-img-wrapper { width: 120px; }
+      .artist-img-wrapper { height: 120px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content { padding: 0 1.25rem; margin-top: 40px; }
+      .hero-title { font-size: clamp(2rem, 9vw, 2.6rem); }
+      .hero-sub { font-size: 0.97rem; }
+      .hero-btns { flex-direction: column; width: 100%; max-width: 320px; }
+      .btn-start, .btn-explore { width: 100%; justify-content: center; padding: 13px 24px; font-size: 0.92rem; }
+      .stat-num { font-size: 1.5rem; }
+      .hero-stats { gap: 1.75rem; }
+      .player-inner { flex-wrap: wrap; }
+      .album-art { width: 100%; min-height: 0; height: 200px; border-radius: 22px 22px 0 0; flex-shrink: 0; }
+      .player-right { padding: 18px; }
+      .player-wrap { padding: 0 0.75rem 2.5rem; }
+      .top-artists { padding: 40px 1.25rem 10px; }
+      .fs-title { font-size: 1.6rem; }
+      .fs-panel { gap: 1.4rem; }
+      .fs-controls { gap: 0.8rem; }
+      .fs-ctrl { width: 44px; height: 44px; }
+      .fs-play-btn { width: 60px; height: 60px; }
+      .fs-close-btn { top: 0.8rem; right: 0.8rem; width: 38px; height: 38px; }
+      .fullscreen-overlay { padding: 1.25rem; }
+      .fs-volume { gap: 8px; }
+    }
+
+    @media (max-width: 380px) {
+      .album-art { height: 170px; }
+      .track-title { font-size: 1.05rem; }
+      .controls { gap: 4px; }
+      .ctrl { font-size: 0.9rem; padding: 4px; }
+      .ctrl-play { width: 42px; height: 42px; font-size: 1rem; }
+      .fs-album { width: 180px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== LOADING SCREEN ===== -->
+  <div id="loading-screen">
+    <div class="loader-logo">SONICWAVE</div>
+    <div class="loader-bars">
+      <div class="loader-bar"></div><div class="loader-bar"></div>
+      <div class="loader-bar"></div><div class="loader-bar"></div>
+      <div class="loader-bar"></div><div class="loader-bar"></div>
+      <div class="loader-bar"></div>
+    </div>
+  </div>
 
   <!-- ==============================
        NAVBAR
@@ -1185,7 +1232,7 @@
             <img src="images/singer/arijitsingh.jpg"
                  alt="Euphoria - Midnight Drive"
                  id="miniAlbumImg"
-                 onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'" />
+                 onerror="this.src='images/music.jpeg'" />
             <div class="album-art-overlay"></div>
             <div class="album-label">
               <span>EUPHORIA</span>
@@ -1276,7 +1323,7 @@
         <img src="images/singer/arijitsingh.jpg"
              alt="Album Art"
              id="fsAlbumImg"
-             onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'" />
+             onerror="this.src='images/music.jpeg'" />
       </div>
 
       <!-- FS Player Panel -->
@@ -1347,7 +1394,7 @@
     <div style="max-width:1300px;margin:0 auto;">
       <div style="text-align:center;margin-bottom:3rem;">
         <div style="font-size:0.78rem;font-weight:700;letter-spacing:3px;color:#ff00cc;text-transform:uppercase;margin-bottom:1rem;">🔥 Hot Right Now</div>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:2.2rem;font-weight:800;margin-bottom:0.8rem;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem, 7vw, 2.2rem);font-weight:800;margin-bottom:0.8rem;">
           Trending <span style="background:linear-gradient(135deg,#ff00cc,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Songs</span>
         </h2>
         <p style="color:rgba(255,255,255,0.5);">Most played tracks this week</p>
@@ -1364,11 +1411,11 @@
     <div style="max-width:1300px;margin:0 auto;">
       <div style="text-align:center;margin-bottom:2.5rem;">
         <div style="font-size:0.78rem;font-weight:700;letter-spacing:3px;color:#ff00cc;text-transform:uppercase;margin-bottom:1rem;">🌍 Browse By Origin</div>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:2.2rem;font-weight:800;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem, 7vw, 2.2rem);font-weight:800;">
           Music <span style="background:linear-gradient(135deg,#ff00cc,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Categories</span>
         </h2>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;" id="catGrid"></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.5rem;" id="catGrid"></div>
     </div>
   </section>
 
@@ -1377,8 +1424,8 @@
     <div style="max-width:1300px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:24px;overflow:hidden;display:flex;align-items:stretch;min-height:350px;flex-wrap:wrap;">
       
       <!-- 40% Text Area -->
-      <div style="flex:1 1 40%; padding:4rem; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2;">
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:3rem;font-weight:900;margin-bottom:1rem;line-height:1.1;">
+      <div style="flex:1 1 40%; padding:clamp(2rem, 6vw, 4rem); display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(2.2rem, 9vw, 3rem);font-weight:900;margin-bottom:1rem;line-height:1.1;">
           Go <span style="background:linear-gradient(135deg,#ff00cc,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Premium.</span><br />Feel the Difference.
         </h2>
         <p style="font-size:1.1rem;color:rgba(255,255,255,0.7);margin-bottom:2.5rem;line-height:1.6;">
@@ -1390,7 +1437,7 @@
       </div>
 
       <!-- 60% Image Area -->
-      <div style="flex:1 1 60%; position:relative; min-height:350px;">
+      <div style="flex:1 1 60%; position:relative; min-height:clamp(220px, 55vw, 350px);">
         <img src="images/cloud.jpeg" alt="DJ Crowd" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;" />
         <!-- Gradient to blend the image edge with the left side -->
         <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(6,6,16,1) 0%, transparent 25%);"></div>
@@ -1430,7 +1477,7 @@
       </div>
 
       <!-- Right: Badges -->
-      <div style="display:flex;align-items:center;gap:12px;">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;">
         <a href="#" style="display:flex;align-items:center;gap:8px;background:#000;border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:8px;color:#fff;text-decoration:none;transition:all 0.3s;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 14c-.1-3.2 2.6-4.8 2.7-4.8-1.5-2.2-3.8-2.5-4.6-2.6-2-.2-3.8 1.2-4.8 1.2-1.1 0-2.6-1.1-4.2-1.1-2.1 0-4 1.2-5.1 3-2.1 3.8-.5 9.4 1.6 12.3 1 1.4 2.2 3 3.7 2.9 1.5-.1 2.1-.9 3.9-.9 1.8 0 2.3.9 3.9.9 1.6.1 2.6-1.7 3.6-3.1 1.2-1.6 1.7-3.3 1.7-3.4-.1-.1-2.3-.9-2.4-3.5zM15 4.9c.8-1 1.4-2.4 1.2-3.8-1.2.1-2.7.8-3.6 1.7-.7.7-1.4 2.1-1.2 3.6 1.4.1 2.7-.6 3.6-1.5z"/></svg>
           <div style="display:flex;flex-direction:column;">
@@ -1630,7 +1677,7 @@
 
     // Update mini card
     const mImg = document.getElementById('miniAlbumImg');
-    if (mImg) { mImg.src = s.img; mImg.onerror = () => { mImg.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'; }; }
+    if (mImg) { mImg.src = s.img; mImg.onerror = () => { mImg.src='images/music.jpeg'; }; }
     const mT = document.getElementById('miniTitle');
     if (mT) mT.textContent = s.title;
     const mA = document.getElementById('miniArtist');
@@ -1638,7 +1685,7 @@
 
     // Update FS
     const fImg = document.getElementById('fsAlbumImg');
-    if (fImg) { fImg.src = s.img; fImg.onerror = () => { fImg.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'; }; }
+    if (fImg) { fImg.src = s.img; fImg.onerror = () => { fImg.src='images/music.jpeg'; }; }
     const fT = document.getElementById('fsTitle');
     if (fT) fT.textContent = s.title;
     const fA = document.getElementById('fsArtist');
@@ -1775,7 +1822,7 @@
     { title:'Kesariya', artist:'Arijit Singh', img:'images/singer/arijitsingh.jpg', dur:'4:28', flag:'🇮🇳' },
     { title:'Shape of You', artist:'Ed Sheeran', img:'images/singer/Ed Sheeran.jfif', dur:'3:54', flag:'🌐' },
     { title:'Dilbar', artist:'Neha Kakkar', img:'images/singer/Neha Kakkar.jfif', dur:'3:22', flag:'🇮🇳' },
-    { title:'Poh Naswam Pa Zan', artist:'Shah Farooq', img:'images/singer/shah farooq', dur:'4:15', flag:'🇵🇰' },
+    { title:'Poh Naswam Pa Zan', artist:'Shah Farooq', img:'images/singer/shah farooq.jpg', dur:'4:15', flag:'🇵🇰' },
       
 
   ];
@@ -1796,7 +1843,7 @@
          onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(255,255,255,0.07)'">
         <div style="position:relative;aspect-ratio:1;overflow:hidden;">
           <img src="${s.img}" alt="${s.title}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;"
-               onerror="this.src='images/WhatsApp Image 2026-07-19 at 9.51.24 PM.jpeg'"
+               onerror="this.src='images/music.jpeg'"
                onmouseover="this.style.transform='scale(1.08)'"
                onmouseout="this.style.transform=''" />
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,16,0.85) 0%,transparent 60%);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;"

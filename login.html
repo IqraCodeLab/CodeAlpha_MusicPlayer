@@ -214,6 +214,16 @@
       to   { opacity:1; transform:translateY(0); }
     }
     .auth-card { animation: fadeUp 0.5s ease both; }
+
+    @media (max-width: 480px) {
+      .auth-card { padding: 1.5rem 1.25rem; }
+      .auth-page { padding: 70px 0.75rem 1rem; }
+      .auth-logo span { font-size: 1.25rem; }
+    }
+    @media (max-width: 380px) {
+      .auth-card { padding: 1.25rem 1rem; border-radius: 16px; }
+      .auth-title { font-size: 1.4rem; }
+    }
   </style>
 </head>
 <body>
