@@ -29,12 +29,14 @@
     .hero {
       position: relative;
       min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      padding-top: 85px;
+      padding-top: var(--nav-height);
+      padding-bottom: 2rem;
     }
 
     /* BG IMAGE */
@@ -76,37 +78,16 @@
       --glow-pink: rgba(255,0,204,0.4);
       --glow-purple: rgba(168,85,247,0.4);
     }
-    /* Floating particles */
-    .particles {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      animation: floatUp linear infinite;
-      opacity: 0;
-    }
-
-    @keyframes floatUp {
-      0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
-      5%   { opacity: 0.7; }
-      95%  { opacity: 0.4; }
-      100% { transform: translateY(-10vh) translateX(30px); opacity: 0; }
-    }
-
     /* ===== HERO CONTENT ===== */
     .hero-content {
       position: relative;
       z-index: 5;
       text-align: center;
       max-width: 820px;
+      width: 100%;
       padding: 0 2rem;
-      margin-top: 60px;
-      margin-bottom: 2rem;
+      margin-top: 40px;
+      margin-bottom: 1.5rem;
     }
 
     .hero-badge {
@@ -379,52 +360,10 @@
       animation: blink 1s ease-in-out infinite;
     }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
-    }
-
     .player-actions {
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-
-    .icon-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: rgba(255,255,255,0.5);
-      font-size: 1.1rem;
-      transition: all 0.3s;
-      padding: 4px;
-      border-radius: 6px;
-      line-height: 1;
-    }
-
-    .icon-btn:hover { color: #fff; }
-
-    .icon-btn.liked { color: #ff00cc; text-shadow: 0 0 10px #ff00cc; }
-
-    /* Fullscreen Button */
-    .fullscreen-btn {
-      background: rgba(168,85,247,0.15) !important;
-      border: 1px solid rgba(168,85,247,0.3) !important;
-      color: #a855f7 !important;
-      width: 30px;
-      height: 30px;
-      border-radius: 8px !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem !important;
-      transition: all 0.3s !important;
-    }
-
-    .fullscreen-btn:hover {
-      background: rgba(168,85,247,0.3) !important;
-      box-shadow: 0 0 15px rgba(168,85,247,0.4) !important;
-      color: #fff !important;
     }
 
     /* Track Info */
@@ -445,40 +384,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-    }
-
-    .verified {
-      color: #a855f7;
-      font-size: 0.8rem;
-    }
-
-    /* Waveform */
-    .waveform {
-      display: flex;
-      align-items: center;
-      gap: 2.5px;
-      height: 36px;
-      margin-bottom: 8px;
-      cursor: pointer;
-    }
-
-    .wave-bar {
-      width: 3px;
-      border-radius: 3px;
-      background: linear-gradient(to top, #ff00cc, #a855f7);
-      opacity: 0.35;
-      transition: opacity 0.3s;
-    }
-
-    .waveform.playing .wave-bar {
-      opacity: 1;
-      animation: waveAnim var(--dur, 0.8s) ease-in-out infinite alternate;
-      box-shadow: 0 0 6px rgba(255,0,204,0.5);
-    }
-
-    @keyframes waveAnim {
-      from { height: 4px; }
-      to   { height: var(--h, 24px); }
     }
 
     /* Progress */
@@ -566,307 +471,6 @@
     }
 
     .ctrl-play.paused::after { content: ''; }
-
-    /* ====================================================
-       FULLSCREEN PLAYER OVERLAY
-    ===================================================== */
-    .fullscreen-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.45s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    .fullscreen-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Blurred animated BG */
-    .fs-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('images/banner.jpeg');
-      background-size: cover;
-      background-position: center;
-      filter: blur(50px) brightness(0.25) saturate(1.8);
-      transform: scale(1.1);
-    }
-
-    .fs-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(6,6,16,0.6);
-    }
-
-    .fs-content {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 900px;
-      display: grid;
-      grid-template-columns: 340px 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    /* FS Album Art */
-    .fs-album {
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 0 80px rgba(168,85,247,0.5), 0 0 150px rgba(255,0,204,0.2);
-      aspect-ratio: 1;
-      position: relative;
-    }
-
-    .fs-album img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .fs-album.spinning img {
-      animation: rotateSlow 18s linear infinite;
-    }
-
-    @keyframes rotateSlow {
-      from { transform: scale(1.05) rotate(0deg); }
-      to   { transform: scale(1.05) rotate(360deg); }
-    }
-
-    .fs-album::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border: 2px solid rgba(168,85,247,0.4);
-      border-radius: 24px;
-    }
-
-    /* FS Player Panel */
-    .fs-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 1.8rem;
-    }
-
-    .fs-close-btn {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      width: 44px;
-      height: 44px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s;
-      z-index: 2;
-    }
-
-    .fs-close-btn:hover {
-      background: rgba(168,85,247,0.2);
-      border-color: rgba(168,85,247,0.5);
-      box-shadow: 0 0 15px rgba(168,85,247,0.3);
-    }
-
-    .fs-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #ff00cc;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-    }
-
-    .fs-badge::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      background: #ff00cc;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #ff00cc;
-      animation: blink 1s ease-in-out infinite;
-    }
-
-    .fs-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.8rem;
-      font-weight: 900;
-      line-height: 1.1;
-      background: linear-gradient(135deg, #fff 40%, #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .fs-artist {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.6);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* FS Waveform */
-    .fs-waveform {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      height: 55px;
-    }
-
-    .fs-wave-bar {
-      width: 4px;
-      border-radius: 4px;
-      background: linear-gradient(to top, #ff00cc, #a855f7);
-    }
-
-    .fs-waveform.playing .fs-wave-bar {
-      animation: waveAnim var(--dur, 0.8s) ease-in-out infinite alternate;
-      box-shadow: 0 0 8px rgba(255,0,204,0.4);
-    }
-
-    /* FS Progress */
-    .fs-progress-bar {
-      height: 5px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 5px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .fs-progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #ff00cc, #7b2ff7);
-      border-radius: 5px;
-      width: 45%;
-      box-shadow: 0 0 10px rgba(255,0,204,0.5);
-      position: relative;
-      transition: width 0.5s linear;
-    }
-
-    .fs-progress-fill::after {
-      content: '';
-      position: absolute;
-      right: -6px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 12px;
-      height: 12px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #ff00cc;
-    }
-
-    .fs-times {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.4);
-      font-family: 'Orbitron', sans-serif;
-      margin-top: 6px;
-    }
-
-    /* FS Controls */
-    .fs-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-    }
-
-    .fs-ctrl {
-      width: 50px;
-      height: 50px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.6);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .fs-ctrl:hover {
-      color: #fff;
-      border-color: rgba(168,85,247,0.5);
-      box-shadow: 0 0 20px rgba(168,85,247,0.3);
-      transform: scale(1.1);
-    }
-
-    .fs-ctrl.active {
-      color: #a855f7;
-      border-color: rgba(168,85,247,0.5);
-    }
-
-    .fs-play-btn {
-      width: 72px;
-      height: 72px;
-      background: linear-gradient(135deg, #ff00cc, #7b2ff7);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 0 0 35px rgba(255,0,204,0.6);
-      transition: all 0.3s;
-      border: none;
-    }
-
-    .fs-play-btn:hover {
-      transform: scale(1.12);
-      box-shadow: 0 0 60px rgba(255,0,204,0.8);
-    }
-
-    /* FS Volume */
-    .fs-volume {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .fs-vol-icon {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.5);
-      cursor: pointer;
-    }
-
-    .fs-vol-range {
-      flex: 1;
-      -webkit-appearance: none;
-      height: 4px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 4px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .fs-vol-range::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 12px;
-      height: 12px;
-      background: #a855f7;
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(168,85,247,0.6);
-    }
 
     /* ============ ANIMATIONS ============ */
     @keyframes fadeUp {
@@ -1000,119 +604,72 @@
       text-shadow: 0 0 10px rgba(255,0,204,0.5);
     }
 
-    /* ============ RESPONSIVE ============ */
+    /* ============ RESPONSIVE (index-specific) ============ */
 
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 6px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.3s;
-    }
-
-    .hamburger:hover {
-      background: rgba(168,85,247,0.12);
-      border-color: rgba(168,85,247,0.3);
-    }
-
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: rgba(255,255,255,0.7);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 85px; left: 0; right: 0;
-        background: rgba(6,6,16,0.97);
-        backdrop-filter: blur(30px);
-        padding: 1.5rem 2rem 2rem;
-        border-bottom: 1px solid rgba(168,85,247,0.2);
-        gap: 4px;
-        z-index: 99;
-        animation: slideDown 0.3s ease;
-      }
-      @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-10px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-      .nav-links.open a {
-        padding: 12px 18px;
-        border-radius: 12px;
-        font-size: 1rem;
-      }
-      .hamburger { display: flex; }
-    }
-
-    @media (max-width: 640px) {
-      .hero-stats { gap: 1.5rem; }
-      .music-card { max-width: 100%; }
-      .album-art { width: 120px; }
-      .player-right { padding: 14px 14px 14px 16px; }
-      .fs-content { grid-template-columns: 1fr; }
-      .fs-album { width: 220px; margin: 0 auto; }
-      .fs-title { font-size: 2rem; }
-      .nav-search-btn { display: none; }
-      .nav-sep { display: none; }
-      .navbar { height: 70px; }
-      .nav-links.open { top: 70px; }
-      .hero { padding-top: 70px; }
+    @media (max-width: 1024px) {
+      .hero-content { padding: 0 1.5rem; }
+      .music-card { max-width: 560px; }
       .artists-grid { gap: 1.5rem; }
-      .artist-card, .artist-img-wrapper { width: 120px; }
-      .artist-img-wrapper { height: 120px; }
     }
 
-    @media (max-width: 480px) {
-      .hero-content { padding: 0 1.25rem; margin-top: 40px; }
-      .hero-title { font-size: clamp(2rem, 9vw, 2.6rem); }
-      .hero-sub { font-size: 0.97rem; }
-      .hero-btns { flex-direction: column; width: 100%; max-width: 320px; }
-      .btn-start, .btn-explore { width: 100%; justify-content: center; padding: 13px 24px; font-size: 0.92rem; }
-      .stat-num { font-size: 1.5rem; }
-      .hero-stats { gap: 1.75rem; }
-      .player-inner { flex-wrap: wrap; }
-      .album-art { width: 100%; min-height: 0; height: 200px; border-radius: 22px 22px 0 0; flex-shrink: 0; }
-      .player-right { padding: 18px; }
+    @media (max-width: 768px) {
+      .hero { min-height: auto; padding-bottom: 3rem; }
+      .hero-content { margin-top: 1.5rem; padding: 0 1.25rem; }
+      .hero-sub { font-size: 1rem; }
+      .hero-btns { flex-direction: column; align-items: stretch; }
+      .btn-start, .btn-explore { justify-content: center; width: 100%; }
+      .hero-stats { gap: 1.5rem 2rem; }
       .player-wrap { padding: 0 0.75rem 2.5rem; }
-      .top-artists { padding: 40px 1.25rem 10px; }
-      .fs-title { font-size: 1.6rem; }
-      .fs-panel { gap: 1.4rem; }
-      .fs-controls { gap: 0.8rem; }
-      .fs-ctrl { width: 44px; height: 44px; }
-      .fs-play-btn { width: 60px; height: 60px; }
-      .fs-close-btn { top: 0.8rem; right: 0.8rem; width: 38px; height: 38px; }
-      .fullscreen-overlay { padding: 1.25rem; }
-      .fs-volume { gap: 8px; }
+      .music-card { border-radius: 18px; }
+      .album-art { width: 128px; min-height: 128px; border-radius: 18px 0 0 18px; }
+      .player-right { padding: 14px; }
+      .track-title { font-size: 1.05rem; }
+      .waveform { height: 30px; }
+      .top-artists { padding: 48px 1.25rem 16px; }
+      .section-header--split { gap: 0.5rem; }
+      .scroll-hint { display: none; }
     }
 
-    @media (max-width: 380px) {
-      .album-art { height: 170px; }
-      .track-title { font-size: 1.05rem; }
-      .controls { gap: 4px; }
-      .ctrl { font-size: 0.9rem; padding: 4px; }
-      .ctrl-play { width: 42px; height: 42px; font-size: 1rem; }
-      .fs-album { width: 180px; }
+    @media (max-width: 560px) {
+      .hero-badge { font-size: 0.7rem; letter-spacing: 2px; padding: 6px 16px; }
+      .hero-sub { font-size: 0.92rem; line-height: 1.6; }
+      .hero-sub br { display: none; }
+      .hero-stats { gap: 1.25rem 1.5rem; }
+      .stat-num { font-size: 1.4rem; }
+      .stat-lbl { font-size: 0.68rem; letter-spacing: 1px; }
+
+      /* mini player stacks: artwork on top, controls below */
+      .player-inner { flex-direction: column; }
+      .album-art {
+        width: 100%;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+        border-radius: 18px 18px 0 0;
+      }
+      .album-label { bottom: 12px; }
+      .player-right { padding: 16px 14px 14px; }
+      .player-top { margin-bottom: 12px; }
+      .waveform { height: 26px; gap: 2px; }
+      .ctrl-play { width: 52px; height: 52px; }
+      .controls { gap: 0.25rem; }
+
+      .artists-grid { gap: 1.1rem; padding: 6px; }
+      .artist-card { width: 108px; }
+      .artist-img-wrapper { width: 108px; height: 108px; }
+      .artist-name { font-size: 0.85rem; }
+    }
+
+    @media (max-width: 400px) {
+      .hero-content { padding: 0 1rem; }
+      .album-art { aspect-ratio: 1; }
+      .top-artists { padding: 40px 1rem 12px; }
+      .artist-card { width: 96px; }
+      .artist-img-wrapper { width: 96px; height: 96px; }
     }
   </style>
 </head>
 <body>
-
+   
   <!-- ===== LOADING SCREEN ===== -->
   <div id="loading-screen">
     <div class="loader-logo">SONICWAVE</div>
@@ -1124,9 +681,7 @@
     </div>
   </div>
 
-  <!-- ==============================
-       NAVBAR
-  ================================= -->
+
   <nav class="navbar" id="mainNavbar">
     <div class="nav-inner">
 
@@ -1169,9 +724,9 @@
     </div>
   </nav>
 
-  <!-- ==============================
-       HERO SECTION
-  ================================= -->
+  
+  
+
   <section class="hero" id="hero">
 
     <!-- BG image -->
@@ -1220,9 +775,6 @@
       </div>
     </div>
 
-    <!-- ==============================
-         FLOATING MUSIC PLAYER CARD
-    ================================= -->
     <div class="player-wrap">
       <div class="music-card" id="musicCard">
         <div class="player-inner">
@@ -1303,9 +855,8 @@
 
   </section>
 
-  <!-- ==============================
-       FULLSCREEN PLAYER OVERLAY
-  ================================= -->
+
+
   <div class="fullscreen-overlay" id="fullscreenOverlay">
 
     <!-- Blurred BG -->
@@ -1378,8 +929,8 @@
 
   <!-- Top Artists Section -->
   <section class="top-artists" id="topArtistsSection">
-    <div class="section-header">
-      <h2 class="section-title">Top <span>Artists</span></h2>
+    <div class="section-header section-header--split">
+      <h2 class="section-title">Top <span class="grad-text">Artists</span></h2>
       <a href="categories.html" class="view-all">View All</a>
     </div>
     <div class="artists-grid-wrapper">
@@ -1390,117 +941,107 @@
   </section>
 
   <!-- Quick Songs Section -->
-  <section style="padding:80px 2rem; background:var(--dark);">
-    <div style="max-width:1300px;margin:0 auto;">
-      <div style="text-align:center;margin-bottom:3rem;">
-        <div style="font-size:0.78rem;font-weight:700;letter-spacing:3px;color:#ff00cc;text-transform:uppercase;margin-bottom:1rem;">🔥 Hot Right Now</div>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem, 7vw, 2.2rem);font-weight:800;margin-bottom:0.8rem;">
-          Trending <span style="background:linear-gradient(135deg,#ff00cc,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Songs</span>
-        </h2>
-        <p style="color:rgba(255,255,255,0.5);">Most played tracks this week</p>
+  <section class="section-pad">
+    <div class="section-inner">
+      <div class="block-head">
+        <div class="block-eyebrow">🔥 Hot Right Now</div>
+        <h2 class="block-title">Trending <span class="grad-text">Songs</span></h2>
+        <p class="block-sub">Most played tracks this week</p>
       </div>
-      <div id="trendingSongs" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.4rem;"></div>
-      <div style="text-align:center;margin-top:2.5rem;">
+      <div id="trendingSongs" class="trending-grid"></div>
+      <div class="block-cta">
         <a href="explore.html" class="btn-start" style="display:inline-flex;">🎵 View All Songs</a>
       </div>
     </div>
   </section>
 
   <!-- Categories Preview -->
-  <section style="padding:0 2rem 80px;background:var(--dark);">
-    <div style="max-width:1300px;margin:0 auto;">
-      <div style="text-align:center;margin-bottom:2.5rem;">
-        <div style="font-size:0.78rem;font-weight:700;letter-spacing:3px;color:#ff00cc;text-transform:uppercase;margin-bottom:1rem;">🌍 Browse By Origin</div>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem, 7vw, 2.2rem);font-weight:800;">
-          Music <span style="background:linear-gradient(135deg,#ff00cc,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Categories</span>
-        </h2>
+  <section class="section-pad">
+    <div class="section-inner">
+      <div class="block-head">
+        <div class="block-eyebrow">🌍 Browse By Origin</div>
+        <h2 class="block-title">Music <span class="grad-text">Categories</span></h2>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.5rem;" id="catGrid"></div>
+      <div class="cat-grid" id="catGrid"></div>
     </div>
   </section>
 
   <!-- Premium Section -->
-  <section style="padding:0 2rem 40px; background:var(--dark);">
-    <div style="max-width:1300px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:24px;overflow:hidden;display:flex;align-items:stretch;min-height:350px;flex-wrap:wrap;">
-      
-      <!-- 40% Text Area -->
-      <div style="flex:1 1 40%; padding:clamp(2rem, 6vw, 4rem); display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2;">
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(2.2rem, 9vw, 3rem);font-weight:900;margin-bottom:1rem;line-height:1.1;">
-          Go <span style="background:linear-gradient(135deg,#ff00cc,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Premium.</span><br />Feel the Difference.
-        </h2>
-        <p style="font-size:1.1rem;color:rgba(255,255,255,0.7);margin-bottom:2.5rem;line-height:1.6;">
-          Ad-free listening, unlimited skips,<br />offline downloads, and more.
-        </p>
+  <section class="section-pad">
+    <div class="premium-wrap">
+
+      <!-- Text Area -->
+      <div class="premium-text">
+        <h2 class="premium-title">Go <span class="grad-text">Premium.</span><br />Feel the Difference.</h2>
+        <p class="premium-sub">Ad-free listening, unlimited skips,<br />offline downloads, and more.</p>
         <div>
           <a href="#" class="btn-start" style="padding:14px 32px;font-size:1rem;display:inline-block;">Try Premium Free ➔</a>
         </div>
       </div>
 
-      <!-- 60% Image Area -->
-      <div style="flex:1 1 60%; position:relative; min-height:clamp(220px, 55vw, 350px);">
-        <img src="images/cloud.jpeg" alt="DJ Crowd" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;" />
-        <!-- Gradient to blend the image edge with the left side -->
-        <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(6,6,16,1) 0%, transparent 25%);"></div>
+      <!-- Image Area -->
+      <div class="premium-media">
+        <img src="images/cloud.jpeg" alt="DJ Crowd" />
       </div>
-      
+
     </div>
   </section>
 
   <!-- App Store / Rating Banner -->
-  <section style="padding:0 2rem 80px; background:var(--dark);">
-    <div style="max-width:1300px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
-      
+  <section class="section-pad">
+    <div class="store-banner">
+
       <!-- Left: Logo & Text -->
-      <div style="display:flex;align-items:center;gap:16px;">
-        <div style="width:52px;height:52px;background:linear-gradient(135deg, rgba(255,0,204,0.15), rgba(168,85,247,0.2));border:1px solid rgba(168,85,247,0.35);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-          <div style="display:flex;align-items:flex-end;gap:2.5px;height:22px;">
-            <div style="width:3px;height:10px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
-            <div style="width:3px;height:18px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
-            <div style="width:3px;height:22px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
-            <div style="width:3px;height:14px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
-            <div style="width:3px;height:8px;border-radius:2px;background:linear-gradient(to top, #ff00cc, #a855f7);"></div>
+      <div class="store-brand">
+        <div class="store-icon">
+          <div class="store-logo-bars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
         </div>
         <div>
-          <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:2px;">SonicWave</h3>
-          <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Your music. Your vibe.</p>
+          <div class="store-name">SonicWave</div>
+          <div class="store-tag">Your music. Your vibe.</div>
         </div>
       </div>
 
       <!-- Middle: Rating -->
-      <div style="display:flex;flex-direction:column;align-items:center;">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span style="font-size:1.4rem;font-weight:700;font-family:'Orbitron',sans-serif;">4.8</span>
-          <div style="color:#fbbf24;font-size:1.2rem;letter-spacing:2px;">★★★★★</div>
+      <div class="store-rating">
+        <div class="store-score">
+          <b>4.8</b>
+          <div class="stars">★★★★★</div>
         </div>
-        <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:2px;">50K+ Reviews</p>
+        <div class="store-reviews">50K+ Reviews</div>
       </div>
 
       <!-- Right: Badges -->
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;">
-        <a href="#" style="display:flex;align-items:center;gap:8px;background:#000;border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:8px;color:#fff;text-decoration:none;transition:all 0.3s;">
+      <div class="store-badges">
+        <a href="#" class="store-badge">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 14c-.1-3.2 2.6-4.8 2.7-4.8-1.5-2.2-3.8-2.5-4.6-2.6-2-.2-3.8 1.2-4.8 1.2-1.1 0-2.6-1.1-4.2-1.1-2.1 0-4 1.2-5.1 3-2.1 3.8-.5 9.4 1.6 12.3 1 1.4 2.2 3 3.7 2.9 1.5-.1 2.1-.9 3.9-.9 1.8 0 2.3.9 3.9.9 1.6.1 2.6-1.7 3.6-3.1 1.2-1.6 1.7-3.3 1.7-3.4-.1-.1-2.3-.9-2.4-3.5zM15 4.9c.8-1 1.4-2.4 1.2-3.8-1.2.1-2.7.8-3.6 1.7-.7.7-1.4 2.1-1.2 3.6 1.4.1 2.7-.6 3.6-1.5z"/></svg>
-          <div style="display:flex;flex-direction:column;">
-            <span style="font-size:0.6rem;opacity:0.8;line-height:1;">Download on the</span>
-            <span style="font-size:1.05rem;font-weight:600;line-height:1.1;">App Store</span>
+          <div>
+            <small>Download on the</small>
+            <b>App Store</b>
           </div>
         </a>
-        <a href="#" style="display:flex;align-items:center;gap:8px;background:#000;border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:8px;color:#fff;text-decoration:none;transition:all 0.3s;">
+        <a href="#" class="store-badge">
           <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4caf50" d="M3.6 3.3L15.3 12 3.6 20.7C3.2 20.9 3 20.6 3 20.2V3.8c0-.4.2-.7.6-.5z"/><path fill="#ffeb3b" d="M15.3 12l4.8-3.6-2.5-1.5-2.3 5.1z"/><path fill="#f44336" d="M3.6 3.3l14 8.1 2.5-1.5C21.3 9 21.3 7.8 20.1 7.1L4.8 2.8c-.5-.3-.9-.1-1.2.5z"/><path fill="#2196f3" d="M3.6 20.7l14-8.1 2.5 1.5c1.2.7 1.2 1.9 0 2.6L4.8 21.2c-.5.3-.9.1-1.2-.5z"/></svg>
-          <div style="display:flex;flex-direction:column;">
-            <span style="font-size:0.6rem;opacity:0.8;line-height:1;">GET IT ON</span>
-            <span style="font-size:1.05rem;font-weight:600;line-height:1.1;">Google Play</span>
+          <div>
+            <small>GET IT ON</small>
+            <b>Google Play</b>
           </div>
         </a>
       </div>
-      
+
     </div>
   </section>
 
   <!-- Footer -->
-  <footer style="background:#0a0a18;border-top:1px solid rgba(255,255,255,0.06);padding:40px 2rem;text-align:center;margin-bottom:0;box-shadow:0 -10px 40px rgba(168,85,247,0.15);">
-    <div style="font-family:'Orbitron',sans-serif;font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#ff00cc,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;">🎵 SonicWave</div>
-    <p style="color:rgba(255,255,255,0.3);font-size:0.85rem;text-align:center;">© 2026 SonicWave. Made by IQra khan ❤️</p>
+  <footer class="footer-simple">
+    <div class="footer-simple-title">🎵 SonicWave</div>
+    <p>© 2026 SonicWave. Made by IQra khan ❤️</p>
   </footer>
 
   <!-- ===== PLAYER BAR ===== -->
@@ -1719,7 +1260,6 @@
     // Sync state
     syncPlayBtns();
     syncWaveforms();
-    updateProgressUI();
   }
 
   function closeFullscreenPlayer() {
@@ -1822,7 +1362,7 @@
     { title:'Kesariya', artist:'Arijit Singh', img:'images/singer/arijitsingh.jpg', dur:'4:28', flag:'🇮🇳' },
     { title:'Shape of You', artist:'Ed Sheeran', img:'images/singer/Ed Sheeran.jfif', dur:'3:54', flag:'🌐' },
     { title:'Dilbar', artist:'Neha Kakkar', img:'images/singer/Neha Kakkar.jfif', dur:'3:22', flag:'🇮🇳' },
-    { title:'Poh Naswam Pa Zan', artist:'Shah Farooq', img:'images/singer/shah farooq.jpg', dur:'4:15', flag:'🇵🇰' },
+    { title:'Poh Naswam Pa Zan', artist:'Shah Farooq', img:'images/singer/shah farooq', dur:'4:15', flag:'🇵🇰' },
       
 
   ];
@@ -1831,33 +1371,20 @@
     const grid = document.getElementById('trendingSongs');
     if (!grid) return;
     grid.innerHTML = DEMO_SONGS.map((s, i) => `
-      <div onclick="heroLoadByIndex(${i})" style="
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.07);
-        border-radius: 16px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: all 0.3s;
-        position: relative;
-      " onmouseover="this.style.transform='translateY(-7px)';this.style.boxShadow='0 0 28px rgba(168,85,247,0.4)';this.style.borderColor='rgba(168,85,247,0.4)'"
-         onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(255,255,255,0.07)'">
-        <div style="position:relative;aspect-ratio:1;overflow:hidden;">
-          <img src="${s.img}" alt="${s.title}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;"
-               onerror="this.src='images/music.jpeg'"
-               onmouseover="this.style.transform='scale(1.08)'"
-               onmouseout="this.style.transform=''" />
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,16,0.85) 0%,transparent 60%);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;"
-               onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
-            <div style="width:50px;height:50px;background:linear-gradient(135deg,#ff00cc,#7b2ff7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 0 25px rgba(255,0,204,0.5);">▶</div>
+      <div class="trend-card animate-on-scroll" onclick="heroLoadByIndex(${i})">
+        <div class="trend-media">
+          <img src="${s.img}" alt="${s.title}" loading="lazy"
+               onerror="this.src='images/music.jpeg'" />
+          <div class="trend-overlay">
+            <div class="trend-play">▶</div>
           </div>
         </div>
-        <div style="padding:14px;">
-          <div style="font-size:0.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;">${s.flag} ${s.title}</div>
-          <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:10px;">${s.artist}</div>
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-size:0.72rem;color:rgba(255,255,255,0.3);font-family:'Orbitron',sans-serif;">${s.dur}</span>
-            <span style="color:rgba(255,255,255,0.3);font-size:0.9rem;cursor:pointer;transition:color 0.3s;"
-                  onmouseover="this.style.color='#ff00cc'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">♡</span>
+        <div class="trend-info">
+          <div class="trend-title">${s.flag} ${s.title}</div>
+          <div class="trend-artist">${s.artist}</div>
+          <div class="trend-meta">
+            <span class="trend-dur">${s.dur}</span>
+            <span class="trend-like">♡</span>
           </div>
         </div>
       </div>
@@ -1883,23 +1410,13 @@
       { name:'Pashto', count:'8.5K', flag:'🇵🇰', img:'images/singer/Shan khan.jfif', href:'categories.html#pashto' },
     ];
     grid.innerHTML = cats.map(c => `
-      <a href="${c.href}" style="
-        display:block;
-        border-radius:20px;
-        overflow:hidden;
-        cursor:pointer;
-        position:relative;
-        min-height:200px;
-        transition:all 0.3s;
-        text-decoration:none;
-      " onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 0 40px rgba(168,85,247,0.5)'"
-         onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="position:absolute;inset:0;background-image:url('${c.img}');background-size:cover;background-position:center;filter:brightness(0.4);transition:all 0.5s;"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,16,0.92) 0%,transparent 60%);"></div>
-        <div style="position:relative;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;min-height:200px;">
-          <span style="font-size:2.2rem;margin-bottom:6px;">${c.flag}</span>
-          <div style="font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:3px;">${c.name}</div>
-          <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${c.count} Songs</div>
+      <a href="${c.href}" class="cat-card">
+        <div class="cat-bg" style="background-image:url('${c.img}')"></div>
+        <div class="cat-shade"></div>
+        <div class="cat-body">
+          <span class="cat-flag">${c.flag}</span>
+          <div class="cat-name">${c.name}</div>
+          <div class="cat-count">${c.count} Songs</div>
         </div>
       </a>
     `).join('');
@@ -1943,30 +1460,6 @@
     });
   });
 
-  // ---- Mobile Nav Toggle ----
-  function toggleMobileNav() {
-    const links = document.getElementById('mainNavLinks');
-    const btn   = document.getElementById('hamburgerBtn');
-    if (!links || !btn) return;
-    links.classList.toggle('open');
-    btn.classList.toggle('open');
-    // close on outside click
-    if (links.classList.contains('open')) {
-      setTimeout(() => {
-        document.addEventListener('click', closeMobileNavOutside, { once: true });
-      }, 10);
-    }
-  }
-
-  function closeMobileNavOutside(e) {
-    const links = document.getElementById('mainNavLinks');
-    const btn   = document.getElementById('hamburgerBtn');
-    const navbar = document.getElementById('mainNavbar');
-    if (navbar && !navbar.contains(e.target)) {
-      if (links) links.classList.remove('open');
-      if (btn)   btn.classList.remove('open');
-    }
-  }
   </script>
 </body>
 </html>

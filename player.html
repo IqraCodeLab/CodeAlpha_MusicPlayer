@@ -11,6 +11,7 @@
     /* ===== PLAYER PAGE EXTRA STYLES ===== */
     .player-page-layout {
       height: 100vh;
+      min-height: 100svh;
       padding-top: var(--nav-height);
       display: grid;
       grid-template-columns: 1fr 380px;
@@ -26,6 +27,8 @@
       align-items: center;
       position: relative;
       z-index: 1;
+      min-width: 0;
+      overflow-y: auto;
     }
 
     .player-sidebar {
@@ -364,16 +367,50 @@
     }
 
     /* Responsive */
+    @media (max-width: 1024px) {
+      .player-page-layout { grid-template-columns: 1fr 320px; }
+    }
+
     @media (max-width: 900px) {
-      .player-page-layout { grid-template-columns: 1fr; }
-      .player-sidebar { border-left: none; border-top: 1px solid var(--border-glass); }
-      .album-art-container { width: 260px; }
+      /* stack: player on top, queue below — the page must scroll */
+      .player-page-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+      }
+      .player-sidebar {
+        border-left: none;
+        border-top: 1px solid var(--border-glass);
+        padding: 1.5rem 1.25rem 2rem;
+      }
+      .queue-list { max-height: 45vh; }
+      .album-art-container { width: 250px; }
+      .player-main { padding: 1.5rem 1.25rem; }
+    }
+
+    @media (max-width: 640px) {
+      .album-art-container { width: min(72vw, 220px); }
+      .play-btn-full { width: 68px; height: 68px; font-size: 1.6rem; }
+      .ctrl-full-btn { width: 44px; height: 44px; font-size: 1rem; }
+      .controls-full { gap: 10px; }
+      .queue-list { max-height: 40vh; }
+      .sidebar-title { font-size: 0.8rem; letter-spacing: 1.5px; }
     }
 
     @media (max-width: 480px) {
-      .player-main { padding: 2rem 1.5rem; }
-      .album-art-container { width: 220px; }
-      .play-btn-full { width: 64px; height: 64px; font-size: 1.5rem; }
+      .player-main { padding: 1.25rem 1rem 2rem; }
+      .album-art-container { width: min(70vw, 200px); }
+      .play-btn-full { width: 62px; height: 62px; font-size: 1.4rem; }
+      .ctrl-full-btn { width: 40px; height: 40px; }
+      .player-sidebar { padding: 1.25rem 1rem 1.5rem; }
+      .queue-list { max-height: 36vh; }
+    }
+
+    /* landscape phones: keep it on one screen */
+    @media (max-height: 520px) and (orientation: landscape) {
+      .player-page-layout { height: 100vh; min-height: 0; overflow: hidden; }
+      .player-sidebar { display: none; }
     }
   </style>
 </head>

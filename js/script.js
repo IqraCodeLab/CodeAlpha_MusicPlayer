@@ -1,13 +1,8 @@
-/* ============================================================
-   SONICWAVE - Complete JavaScript Engine
-   Handles: Music Data, Audio Player, Animations, UI
-   ============================================================ */
+
 
 'use strict';
 
-// ============================================================
-// 1. SONG DATABASE
-// ============================================================
+
 const SONGS = [
   { id: 4, title: 'Chhod Diya', artist: 'Arijit Singh', category: 'hindi', flag: '🇮🇳', duration: '4:22', image: 'images/singer/arijitsingh.jpg', file: 'songs/Chhod Diya (Lyrics) - Arijit Singh_ Kanika Kapoor _ Baazaar(M4A_128K).m4a', tags: ['sad', 'romantic'], year: 2018, plays: 92400 },
   { id: 2, title: 'Pehli Dafa', artist: 'Atif Aslam', category: 'urdu', flag: '🇵🇰', duration: '4:18', image: 'images/singer/atif aslam.jfif', file: 'songs/Atif Aslam_ Pehli Dafa Song (Video) _ Ileana D_Cruz _ Latest Hindi Song 2017 _ T-Series(M4A_128K).m4a', tags: ['romantic', 'pop'], year: 2017, plays: 62100 },
@@ -29,12 +24,12 @@ const SONGS = [
   { id: 18, title: 'Khamoshiyan', artist: 'Arijit Singh', category: 'hindi', flag: '🇮🇳', duration: '5:35', image: 'images/singer/arijitsingh.jpg', file: 'songs/Khamoshiyan (Title Song) Lyrics _ Arijit Singh _ Rashmi S _ Jeet G _ Ali Fazal _ Sapna P _ Gurmeet C(M4A_128K).m4a', tags: ['romantic', 'classic'], year: 2015, plays: 82100 },
   { id: 19, title: 'Larsha Pekhawar', artist: 'Ali Zafar ft. Gul Panra', category: 'pashto', flag: '🇵🇰', duration: '3:50', image: 'images/singer/Ali Zafar.jfif', file: 'songs/Larsha Pekhawar _ Ali Zafar ft. Gul Panra _ Fortitude Pukhtoon Core _ Pashto Song(M4A_128K).m4a', tags: ['pashto', 'trending'], year: 2021, plays: 73600 },
   { id: 20, title: 'Mile Ho Tum', artist: 'Neha Kakkar', category: 'hindi', flag: '🇮🇳', duration: '3:30', image: 'images/singer/Neha Kakkar.jfif', file: 'songs/Mile Ho Tum - Reprise Version _ Neha Kakkar _ Tony Kakkar _ Fever _ Gaurav Jang(M4A_128K).m4a', tags: ['sad', 'acoustic'], year: 2016, plays: 54300 },
-  { id: 21, title: 'Pa Ma Mayana', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '3:22', image: 'images/singer/shah farooq.jpg, file: 'songs/Pashto New Songs 2020 _ Shah Farooq New Tappy Tapay Tappaezy 2020 _ Pa Ma Mayana Khude De Mar Ka(MP3_160K).mp3', tags: ['pashto', 'tappy'], year: 2020, plays: 69800 },
-  { id: 22, title: 'Poh Naswam Pa Zan', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '4:15', image: 'images/singer/shah farooq.jpg, file: 'songs/Pashto New Songs 2025 _ Poh Naswam Pa Zan Bande _ Shah Farooq New Songs 2025 _ Pashto Songs 2025(MP3_160K).mp3', tags: ['pashto', 'new'], year: 2025, plays: 92000 },
+  { id: 21, title: 'Pa Ma Mayana', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '3:22', image: 'images/singer/shah farooq.jpg', file: 'songs/Pashto New Songs 2020 _ Shah Farooq New Tappy Tapay Tappaezy 2020 _ Pa Ma Mayana Khude De Mar Ka(MP3_160K).mp3', tags: ['pashto', 'tappy'], year: 2020, plays: 69800 },
+  { id: 22, title: 'Poh Naswam Pa Zan', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '4:15', image: 'images/singer/shah farooq.jpg', file: 'songs/Pashto New Songs 2025 _ Poh Naswam Pa Zan Bande _ Shah Farooq New Songs 2025 _ Pashto Songs 2025(MP3_160K).mp3', tags: ['pashto', 'new'], year: 2025, plays: 92000 },
   { id: 23, title: 'Regardless', artist: 'Asim Azhar', category: 'urdu', flag: '🇵🇰', duration: '3:45', image: 'images/singer/asim azhar.jfif', file: 'songs/REGARDLESS - Asim Azhar (Official Video)(M4A_128K).m4a', tags: ['trending', 'pop'], year: 2023, plays: 86400 },
   { id: 24, title: 'Diamonds', artist: 'Rihanna', category: 'english', flag: '🌐', duration: '3:45', image: 'images/singer/Rihanna.jfif', file: 'songs/Rihanna - Diamonds(M4A_128K).m4a', tags: ['pop', 'iconic'], year: 2012, plays: 61700 },
   { id: 25, title: 'We Found Love', artist: 'Rihanna', category: 'english', flag: '🌐', duration: '3:35', image: 'images/singer/Rihanna.jfif', file: 'songs/Rihanna - We Found Love ft. Calvin Harris(M4A_128K).m4a', tags: ['dance', 'pop'], year: 2011, plays: 98700 },
-  { id: 26, title: 'Ek Nazar Nazar', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '3:10', image: 'images/singer/shah farooq.jpg, file: 'songs/Shah Farooq New Urdo Pashto Mix Song 2023 _Ek Nazar Nazar _Full 👍 2023 Tik Tok Songs(MP3_160K).mp3', tags: ['mix', 'pashto'], year: 2023, plays: 200000 },
+  { id: 26, title: 'Ek Nazar Nazar', artist: 'Shah Farooq', category: 'pashto', flag: '🇵🇰', duration: '3:10', image: 'images/singer/shah farooq.jpg', file: 'songs/Shah Farooq New Urdo Pashto Mix Song 2023 _Ek Nazar Nazar _Full 👍 2023 Tik Tok Songs(MP3_160K).mp3', tags: ['mix', 'pashto'], year: 2023, plays: 200000 },
   { id: 27, title: 'Taaron Ke Shehar', artist: 'Neha Kakkar', category: 'hindi', flag: '🇮🇳', duration: '4:02', image: 'images/singer/Neha Kakkar.jfif', file: 'songs/Taaron Ke Shehar Song_ Neha Kakkar_ Sunny Kaushal _ Jubin Nautiyal_Jaani _ Bhushan Kumar _ Arvindr K(M4A_128K).m4a', tags: ['romantic', 'sad'], year: 2020, plays: 120000 },
   { id: 28, title: 'Blank Space', artist: 'Taylor Swift', category: 'english', flag: '🌐', duration: '3:51', image: 'images/singer/taylor swift.jfif', file: 'songs/Taylor Swift - Blank Space(M4A_128K).m4a', tags: ['pop', 'trending'], year: 2014, plays: 89000 },
   { id: 29, title: 'Shake It Off', artist: 'Taylor Swift', category: 'english', flag: '🌐', duration: '3:39', image: 'images/singer/taylor swift.jfif', file: 'songs/Taylor Swift - Shake It Off(M4A_128K).m4a', tags: ['pop', 'dance'], year: 2014, plays: 112000 },
@@ -60,9 +55,7 @@ const SONGS = [
 
 ];
 
-// ============================================================
-// 2. STATE
-// ============================================================
+
 const state = {
   currentSong: null,
   currentIndex: 0,
@@ -81,9 +74,7 @@ const state = {
   loadBatch: 12,
 };
 
-// ============================================================
-// 3. UTILITY FUNCTIONS
-// ============================================================
+
 function formatTime(seconds) {
   if (isNaN(seconds) || seconds === Infinity) return '0:00';
   const m = Math.floor(seconds / 60);
@@ -149,9 +140,9 @@ function createSongCard(song, index) {
   `;
 }
 
-// ============================================================
+
 // 5. AUDIO PLAYER ENGINE
-// ============================================================
+
 
 // Set up the audio element properly
 state.audio.preload = 'auto';
@@ -364,12 +355,15 @@ function toggleLike(songId, btn) {
   }
 }
 
-// ============================================================
+
 // 6. UI UPDATES
-// ============================================================
+
 function showPlayerBar() {
   const bar = document.getElementById('playerBar');
-  if (bar) { bar.classList.remove('hidden'); bar.classList.add('visible'); }
+  if (!bar) return;
+  bar.classList.remove('hidden');
+  bar.classList.add('visible');
+  document.body.classList.add('has-player-bar');
 }
 
 function updatePlayerBar(song) {
@@ -449,9 +443,8 @@ function updatePlayerPage(song) {
   if (visualizer) visualizer.classList.toggle('active', state.isPlaying);
 }
 
-// ============================================================
 // 7. PLAYER PAGE INIT
-// ============================================================
+
 function initPlayerPage() {
   // Build visualizer bars
   const vis = document.getElementById('visualizer');
@@ -543,9 +536,9 @@ function updateQueueList() {
   `).join('');
 }
 
-// ============================================================
+
 // 8. HOME PAGE - TRENDING SONGS & TOP ARTISTS
-// ============================================================
+
 function buildTopArtists() {
   const grid = document.getElementById('topArtistsGrid');
   if (!grid) return;
@@ -583,9 +576,9 @@ function initHomePage() {
   observeElements(grid.querySelectorAll('.animate-on-scroll'));
 }
 
-// ============================================================
+
 // 8.5 PLAYER SEEKING LOGIC
-// ============================================================
+
 let isDraggingProgress = false;
 
 function setupProgressBarDrag(trackId, fillId) {
@@ -629,6 +622,10 @@ function initHomePage() {
 
 // Global Initialization
 document.addEventListener('DOMContentLoaded', () => {
+  // Restore the previous session's song BEFORE any page init runs,
+  // so pages don't auto-start a different song.
+  initPlaybackPersistence();
+  initPlaybackSaving();
   if (document.getElementById('topArtistsGrid')) {
     initHomePage();
   }
@@ -663,9 +660,9 @@ function initDraggableProgress() {
 
 document.addEventListener('DOMContentLoaded', initDraggableProgress);
 
-// ============================================================
+
 // 9. EXPLORE PAGE
-// ============================================================
+
 function initExplorePage() {
   const grid = document.getElementById('exploreSongs');
   if (!grid) return;
@@ -892,34 +889,185 @@ function initPlayerBar() {
 // 13. NAVBAR
 // ============================================================
 function initNavbar() {
-  const navbar = document.getElementById('navbar');
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
+  const navbar = document.getElementById('mainNavbar');
+  const hamburger = document.getElementById('hamburgerBtn');
+  const navLinks = document.getElementById('mainNavLinks');
 
   // Scroll effect
-  window.addEventListener('scroll', () => {
-    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
-  });
+  const onScroll = () => {
+    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 40);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   // Hamburger
   if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
       hamburger.classList.toggle('open');
       navLinks.classList.toggle('open');
     });
-  }
 
-  // Close nav on link click (mobile)
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (hamburger) hamburger.classList.remove('open');
-      if (navLinks) navLinks.classList.remove('open');
+    // Close nav when tapping outside
+    document.addEventListener('click', (e) => {
+      if (navbar && !navbar.contains(e.target)) {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      }
     });
+
+    // Close nav on link click (mobile)
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Reset state when returning to desktop width
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      }
+    });
+  }
+}
+
+// ============================================================
+// 15. PERSISTENT PLAYBACK
+// Static pages tear down the <audio> element on navigation, so the
+// song/time is stored in localStorage and restored on the next page.
+// Autoplay is retried automatically; if the browser blocks it a
+// "Resume" pill is shown so the user can start it with one tap.
+// ============================================================
+const PLAYBACK_KEY = 'sonicwave:playback';
+let resumePill = null;
+
+function savePlayback() {
+  if (!state.currentSong) return;
+  try {
+    localStorage.setItem(PLAYBACK_KEY, JSON.stringify({
+      songId: state.currentSong.id,
+      time: state.audio.currentTime || 0,
+      volume: state.volume,
+      isPlaying: state.isPlaying && !state.audio.paused,
+      shuffle: state.isShuffle,
+      repeat: state.isRepeat,
+      liked: Array.from(state.liked),
+      savedAt: Date.now()
+    }));
+  } catch (e) { /* storage unavailable (private mode/quota) */ }
+}
+
+function loadSavedPlayback() {
+  try {
+    const raw = localStorage.getItem(PLAYBACK_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) { return null; }
+}
+
+function seekTo(sec) {
+  if (typeof sec !== 'number' || sec <= 0) return;
+  const apply = () => {
+    if (isFinite(state.audio.duration) && state.audio.duration > 0) {
+      state.audio.currentTime = Math.min(sec, state.audio.duration - 0.25);
+    }
+  };
+  if (state.audio.readyState >= 1) apply();
+  else state.audio.addEventListener('loadedmetadata', apply, { once: true });
+}
+
+function buildResumePill() {
+  if (resumePill) return resumePill;
+  resumePill = document.createElement('div');
+  resumePill.id = 'resumePill';
+  resumePill.className = 'resume-pill';
+  resumePill.innerHTML =
+    '<button class="resume-pill-play" aria-label="Resume playback">&#9654;</button>' +
+    '<span class="resume-pill-text"><strong class="resume-pill-title"></strong><span>Tap to continue listening</span></span>' +
+    '<button class="resume-pill-close" aria-label="Dismiss">&#10005;</button>';
+  document.body.appendChild(resumePill);
+  resumePill.querySelector('.resume-pill-play').addEventListener('click', () => {
+    state.audio.play()
+      .then(() => { resumePill.classList.remove('show'); })
+      .catch(() => {});
+  });
+  resumePill.querySelector('.resume-pill-close').addEventListener('click', () => {
+    resumePill.classList.remove('show');
+  });
+  return resumePill;
+}
+
+function showResumePill(song) {
+  const pill = buildResumePill();
+  pill.querySelector('.resume-pill-title').textContent = song.title;
+  pill.classList.add('show');
+  savePlayback();
+}
+
+function initPlaybackPersistence() {
+  const saved = loadSavedPlayback();
+  if (!saved) return;
+
+  const song = SONGS.find(s => s.id === saved.songId);
+  if (!song) return;
+
+  // Restore user settings first so the UI reflects them
+  if (typeof saved.volume === 'number') {
+    state.volume = Math.min(1, Math.max(0, saved.volume));
+    state.audio.volume = state.volume;
+  }
+  if (typeof saved.shuffle === 'boolean') state.isShuffle = saved.shuffle;
+  if (typeof saved.repeat === 'boolean') state.isRepeat = saved.repeat;
+  if (Array.isArray(saved.liked)) saved.liked.forEach(id => state.liked.add(id));
+
+  // Re-attach the audio source and UI without a play() yet
+  state.currentSong = song;
+  state.currentIndex = SONGS.indexOf(song);
+  state.isPlaying = false;
+
+  if (song.file) {
+    state.audio.src = song.file;
+    state.audio.load();
+  }
+  seekTo(saved.time);
+
+  updateAllPlayerUIs(song);
+  showPlayerBar();
+  updatePlayButtons();
+  if (document.getElementById('albumArtImg')) updatePlayerPage(song);
+
+  // Let the browser try to continue; fall back to a manual tap
+  const attempt = () => {
+    if (!song.file) return;
+    state.audio.play().then(() => {
+      if (resumePill) resumePill.classList.remove('show');
+    }).catch(() => showResumePill(song));
+  };
+  if (saved.isPlaying) {
+    if (state.audio.readyState >= 2) attempt();
+    else state.audio.addEventListener('canplay', attempt, { once: true });
+  }
+}
+
+// Persist on every meaningful change (throttled via timeupdate guard)
+function initPlaybackSaving() {
+  let last = 0;
+  state.audio.addEventListener('timeupdate', () => {
+    const now = Date.now();
+    if (now - last > 1000) { last = now; savePlayback(); }
+  });
+  ['play', 'pause', 'ended', 'volumechange'].forEach(ev =>
+    state.audio.addEventListener(ev, savePlayback));
+  window.addEventListener('pagehide', savePlayback);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') savePlayback();
   });
 }
 
 // ============================================================
-// 14. PARTICLES (Hero)
+// 16. PARTICLES (Hero)
 // ============================================================
 function initParticles() {
   const container = document.getElementById('heroParticles');
